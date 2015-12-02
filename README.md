@@ -1,4 +1,5 @@
-> How to install
+INSTALLATION
+------------
 1. git clone https://git@github.com:KorilSalsen/dz1.dev.git site
 2. cd site
 3. bower i
