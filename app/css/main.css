@@ -75,6 +75,9 @@ ul {
   box-shadow: inset 0 6px 6px 0 rgba(255,255,255,0.5);
   vertical-align: middle;
 }
+.content-block__container_list{
+    padding: 18px 41px;
+}
 .footer {
   background: -webkit-linear-gradient(bottom, #f0f0f0, #fff);
   background: linear-gradient(to top, #f0f0f0, #fff);

@@ -106,14 +106,8 @@
     box-shadow: inset 0 1px 1px 0 rgba(128,128,128,0.29),
     0 0 3px 0 rgba(251,251,251,0.71);
 }
-.content-list__item_first{
-    margin-top: -20px;
-}
 .content-list__item_first:before{
     display: none;
-}
-.content-list__item:last-child{
-    margin-bottom: -20px;
 }
 .content-ico{
     display: block;
