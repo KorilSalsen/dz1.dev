@@ -1,0 +1,134 @@
+.content-block__container_login{
+    padding: 39px 38px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -170px 0 0 -165px;
+    border-radius: 5px;
+}
+.login-form{
+    position: relative;
+}
+.login-form-title{
+    position: absolute;
+    font-size: 12px;
+    line-height: 12px;
+    font-family: 'Open Sans Light', sans-serif;
+    left: 21px;
+    top: -19px;
+}
+.login-form__text{
+    display: block;
+    border: 1px solid #d6d4d3;
+    border-radius: 4px;
+    background: linear-gradient(to top, rgba(233,231,231,0.45), rgb(251,252,253));
+    box-shadow: inset 0 2px 2px 0 rgba(114,112,112,0.1),
+    0 0 1px 0 rgba(255,255,255,0.15),
+    0 1px 0 0 rgba(255,255,255,0.35);
+    font-size: 12px;
+    font-family: 'Open Sans Light', sans-serif;
+    padding: 12px 9px 12px 71px;
+    box-sizing: border-box;
+    height: 41px;
+    line-height: 12px;
+    width: 254px;
+    vertical-align: middle;
+}
+.login-form__text:focus{
+    border-color: #48cbe8;
+}
+.input-wrapper{
+    position: relative;
+    margin-bottom: 24px;
+}
+.input-wrapper_pass{
+    margin-bottom: 17px;
+}
+.input-wrapper:before{
+    display: block;
+    content: '';
+    position: absolute;
+    left: 13px;
+    background-image: url(../img/spritesheet.png);
+    background-repeat: no-repeat;
+}
+.input-wrapper_email:before{
+    width: 23px;
+    height: 17px;
+    top: 13px;
+    background-position: -37px -19px;
+}
+.input-wrapper_pass:before{
+    width: 22px;
+    height: 20px;
+    top: 12px;
+    background-position: -2px -27px;
+}
+.input-wrapper:after{
+    display: block;
+    content: '';
+    height: 100%;
+    width: 11px;
+    position: absolute;
+    left: 42px;
+    top: 0;
+    background-image: url(../img/spritesheet.png);
+    background-repeat: no-repeat;
+    background-position: -694px -5px;
+}
+.login-form__submit{
+    display: block;
+    margin: auto;
+    font-size: 14px;
+    font-family: 'Open Sans Semibold', sans-serif;
+    padding: 11px 52px;
+    width: 152px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+    line-height: 14px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.3),
+    0 2px 1px 0 rgba(9,9,9,0.16);
+    background-image: linear-gradient(to top, #3aa087, #5fdcbd),
+    linear-gradient(to top, #2d997e, #57d2b4);
+    color: #1e7465;
+}
+.login-form__submit:hover{
+    background-image: linear-gradient(to top, #4ad1b7 0%, #88f3d9 100%),
+    linear-gradient(to top, #2d997e, #57d2b4);
+}
+.login-form__submit:active{
+    background-image: linear-gradient(to top, #4ce0c6 0%, #8bffe4 100%),
+    linear-gradient(to top, #2d997e, #57d2b4);
+}
+.login-form__checkbox{
+    display: none;
+}
+.login-form__checkbox-label{
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 22px;
+    line-height: 14px;
+}
+.login-form__checkbox-label:before{
+    display: block;
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    margin-top: -10px;
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/spritesheet.png);
+    background-repeat: no-repeat;
+    background-position: -301px -26px;
+}
+.login-form__checkbox:checked + .login-form__checkbox-label:before{
+    background-position: -327px -26px;
+}

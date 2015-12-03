@@ -1,16 +1,14 @@
 <!doctype html>
 <html lang="ru-RU">
 <head>
-    <!--[if IE 8]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="bower/normalize-css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/feedback.css">
     <!--[if IE 8]>
-    <link rel="stylesheet" href="css/ie.css">
+        <script src="bower/html5shiv/dist/html5shiv.min.js"></script>
+        <link rel="stylesheet" href="css/ie.css">
     <![endif]-->
     <title>Выпускной проект №1. Обратная связь.</title>
 </head>
@@ -22,10 +20,10 @@
                     <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
                 </a>
                 <ul class="social-list cf">
-                    <li class="social-list__item facebook"><a href="" class="socials" title="Facebook">Facebook</a></li>
-                    <li class="social-list__item vk"><a href="https://vk.com/id44931502" class="socials" title="Вконтакте">Вконтакте</a></li>
-                    <li class="social-list__item twitter"><a href="" class="socials" title="Twitter">Twitter</a></li>
-                    <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub">GitHub</a></li>
+                    <li class="social-list__item facebook"><a href="" class="socials" title="Facebook" target="_blank">Facebook</a></li>
+                    <li class="social-list__item vk"><a href="https://vk.com/id44931502" class="socials" title="Вконтакте" target="_blank">Вконтакте</a></li>
+                    <li class="social-list__item twitter"><a href="" class="socials" title="Twitter" target="_blank">Twitter</a></li>
+                    <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub" target="_blank">GitHub</a></li>
                 </ul>
             </div>
         </header>
@@ -50,10 +48,10 @@
                 </nav>
             </aside>
             <section class="content">
-                <!-Работы-->
+                <!--Форма обратной связиы-->
                 <article class="content-block">
                     <h3 class="content-block__tittle">У вас интересный проект? Напишите мне</h3>
-                    <div class="content-block__container cf">
+                    <div class="content-block__container content-block__container_feedback cf">
                         <form action="" class="feedback-form">
                             <div class="input-wrapper cf">
                                 <div class="input input_name">
@@ -86,10 +84,13 @@
     </div>
     <footer class="footer">
         <div class="copyright">
-            <a href="#" class="enter">вход</a>
+            <a href="login.html" class="enter">вход</a>
             <span class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</span>
         </div>
     </footer>
     <script src="bower/jquery/dist/jquery.min.js"></script>
+    <!--[if IE 8]>
+        <script src="bower/placeholder.js/js/jquery.placeholder.js"></script>
+    <![endif]-->
 </body>
 </html>

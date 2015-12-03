@@ -1,3 +1,6 @@
+.content-block__container_list{
+    padding: 18px 41px;
+}
 .avatar-wrapper{
     float: left;
     width: 133px;
@@ -38,7 +41,6 @@
 .key{
     font-family: 'Open Sans Semibold', sans-serif;
 }
-
 .info-list__item_skills{
     margin-top: 13px;
 }

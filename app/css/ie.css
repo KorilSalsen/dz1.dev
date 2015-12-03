@@ -36,6 +36,10 @@
     border: 1px solid #b6b6b6;
     background: #f3f2f1;
 }
+.avatar-wrapper{
+    border: 1px solid #b6b6b6;
+    background: #fff;
+}
 .content-ico{
     background: none;
 }
@@ -51,6 +55,12 @@
 }
 .work__link{
     background: #f2f2f2;
+}
+.work__link:hover{
+    background: #ebebeb;
+}
+.work__link:active{
+    background: #ededed;
 }
 .link-wrapper{
     background: #6F6D6D;
@@ -75,31 +85,43 @@
 .work__add-link:active{
     background: #37c06a;
 }
-.input__button_submit{
+.input__button_submit, .login-form__submit{
     border: 1px solid #3aa087;
     background: #4abb9f;
 }
-.input__button_submit:hover{
+.input__button_submit:hover, .login-form__submit:hover{
     background: #5dceb2;
 }
-.input__button_submit:active{
+.input__button_submit:active, .login-form__submit:active{
     background: #4ce0c6;
 }
 .input__button_reset{
-    float: right;
-    box-shadow: inset 0 0 3px 0 #f6f7f7,
-    0 2px 1px 0 rgba(9,9,9,0.07);
-    background-image: linear-gradient(to top, #e9e6e4 0%, #fbf9f9 94%, #ffffff 100%),
-    linear-gradient(to top, #c5c5c5 0%, #b6b6b6 49%, #d2d2d2 100%);
+    border: 1px solid #d2d2d2;
+    background: #f2f0ef;
 }
 .input__button_reset:hover{
-    background-image: linear-gradient(to top, #c2c0c0 0%, #e3e1e1 87%, #e8e7e7 100%),
-    linear-gradient(to top, #c5c5c5 0%, #b6b6b6 49%, #d2d2d2 100%);
-    box-shadow: inset 0 0 3px 0 rgba(202,202,202,0.61),
-    inset 0 -2px 3px 0 rgba(0,0,0,0.05),
-    0 2px 1px 0 rgba(9,9,9,0.07);
+    background: #dbd9d8;
 }
 .input__button_reset:active{
-    background-image: linear-gradient(to top, #c9c7c7 0%, #f0e8e8 87%, #f5f4f4 100%),
-    linear-gradient(to top, #c5c5c5 0%, #b6b6b6 49%, #d2d2d2 100%);
+    background: #e9e7e6;
+}
+.input-wrapper_pass{
+    margin-bottom: 0;
+}
+.login-form__text_pass{
+    font-family: sans-serif;
+}
+.login-form__checkbox{
+    display: inline;
+}
+.login-form__checkbox-label{
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 12px;
+    margin-top: 17px;
+    margin-bottom: 22px;
+    line-height: 14px;
+}
+.login-form__checkbox-label:before{
+    display: none;
 }

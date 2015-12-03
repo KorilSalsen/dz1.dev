@@ -35,6 +35,12 @@
     font-family: 'Open Sans Semibold', sans-serif;
     border-top: 2px solid #b6b6b6;
 }
+.work__link:hover{
+    background: rgba(65,64,64,0.11);
+}
+.work__link:active{
+    background: rgba(65,64,64,0.08);
+}
 .work__description{
     text-align: center;
     font-size: 12px;
