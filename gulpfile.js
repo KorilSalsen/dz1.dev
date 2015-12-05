@@ -7,7 +7,16 @@ var gulp = require('gulp'),
 gulp.task('concat', function(){
     return gulp.src('css/*.css')
         .pipe(concatCss('main.css'))
-        .pipe(autoPrefix())
+        .pipe(gulp.dest('app/css'));
+});
+
+//Prefix
+gulp.task('prefix', function(){
+    return gulp.src('app/css/*.css')
+        .pipe(autoPrefix({
+            browsers: ['> 1%', 'IE 8'],
+            cascade: false
+        }))
         .pipe(gulp.dest('app/css'));
 });
 
@@ -24,6 +33,7 @@ gulp.task('server', function(){
 //Watch
 gulp.task('watch', function(){
     gulp.watch('css/*.css', ['concat']);
+    gulp.watch('app/css/*.css', ['prefix']);
     gulp.watch([
         'app/*.html',
         'app/js/*.js',
@@ -32,4 +42,4 @@ gulp.task('watch', function(){
 });
 
 //Default
-gulp.task('default', ['concat', 'server', 'watch']);
+gulp.task('default', ['concat', 'prefix', 'server', 'watch']);

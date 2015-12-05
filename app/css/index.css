@@ -1,7 +1,11 @@
-.content-block__container_list{
+.content-block__container_list {
     padding: 18px 41px;
 }
-.avatar-wrapper{
+.content-block__container_info{
+    padding-bottom: 29px;
+}
+
+.avatar-wrapper {
     float: left;
     width: 133px;
     height: 133px;
@@ -10,53 +14,66 @@
     border: 1px solid transparent;
     background-origin: padding-box, border-box;
     background-clip: padding-box, border-box;
+    background-image: -webkit-linear-gradient(#fff, #fff),
+    -webkit-linear-gradient(bottom, #c5c5c5 0%, #b6b6b6 49%, #d2d2d2 90%);
     background-image: linear-gradient(#fff, #fff),
     linear-gradient(to top, #c5c5c5 0%, #b6b6b6 49%, #d2d2d2 90%);
-    box-shadow: inset 0 2px 24px 0 rgba(244,244,244,0.23),
-    4px 4px 32px rgba(236,232,227,0.75);
+    box-shadow: inset 0 2px 24px 0 rgba(244, 244, 244, 0.23),
+    4px 4px 32px rgba(236, 232, 227, 0.75);
 }
-.avatar{
+
+.avatar {
     width: 133px;
     height: 133px;
     border-radius: 50%;
     overflow: hidden;
     background: #fff;
 }
-.avatar__photo{
+
+.avatar__photo {
     width: 100%;
 }
-.block-info{
+
+.block-info {
     float: right;
     width: 379px;
     margin-top: -6px;
 }
-.info-list{
+
+.info-list {
     display: block;
     color: #727070;
 }
-.info-list__item{
+
+.info-list__item {
     line-height: 25px;
     display: block;
 }
-.key{
+
+.key {
     font-family: 'Open Sans Semibold', sans-serif;
 }
-.info-list__item_skills{
+
+.info-list__item_skills {
     margin-top: 13px;
 }
-.key_skills{
+
+.key_skills {
     position: absolute;
     line-height: 19px;
 }
-.skills-list{
+
+.skills-list {
     position: relative;
     left: 146px;
     width: 236px;
 }
-.skill{
+
+.skill {
     float: left;
 }
-.skill{
+
+.skill {
     margin: 0 13px 6px 12px;
     padding: 0 5px 0 3px;
     height: 21px;
@@ -66,11 +83,12 @@
     font-family: 'Open Sans Semibold', sans-serif;
     text-transform: uppercase;
     color: #1e7465;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.45);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
     background: url("../img/label-back-center.png");
     position: relative;
 }
-.skill:before{
+
+.skill:before {
     display: inline-block;
     content: '';
     width: 12px;
@@ -80,7 +98,8 @@
     left: -12px;
     top: 0;
 }
-.skill:after{
+
+.skill:after {
     display: inline-block;
     content: '';
     width: 4px;
@@ -90,13 +109,15 @@
     right: -4px;
     top: 0;
 }
-.content-list__item{
+
+.content-list__item {
     padding: 20px 0 20px 96px;
     position: relative;
     /*margin-top: 2px;*/
     line-height: 25px;
 }
-.content-list__item:before{
+
+.content-list__item:before {
     display: block;
     content: '';
     height: 2px;
@@ -105,13 +126,15 @@
     right: 0;
     top: -2px;
     background: #f6f5f4;
-    box-shadow: inset 0 1px 1px 0 rgba(128,128,128,0.29),
-    0 0 3px 0 rgba(251,251,251,0.71);
+    box-shadow: inset 0 1px 1px 0 rgba(128, 128, 128, 0.29),
+    0 0 3px 0 rgba(251, 251, 251, 0.71);
 }
-.content-list__item_first:before{
+
+.content-list__item_first:before {
     display: none;
 }
-.content-ico{
+
+.content-ico {
     display: block;
     width: 54px;
     height: 54px;
@@ -121,39 +144,45 @@
     left: 0;
     top: 50%;
     margin-top: -27px;
-    box-shadow: inset 1px 1px 0 0 rgba(199,199,199,0.75),
+    box-shadow: inset 1px 1px 0 0 rgba(199, 199, 199, 0.75),
     0 1px 0 0 #fff;
 }
-.content-ico:after{
+
+.content-ico:after {
     display: block;
     content: '';
     background-image: url(../img/spritesheet.png);
     background-repeat: no-repeat;
 }
-.content-ico_case:after{
+
+.content-ico_case:after {
     width: 22px;
     height: 20px;
     background-position: -5px -5px;
     margin: 18px 16px 0;
 }
-.content-ico_school:after{
+
+.content-ico_school:after {
     width: 22px;
     height: 22px;
     background-position: -365px -5px;
     margin: 18px 18px 0;
 }
-.content-ico_graduate:after{
+
+.content-ico_graduate:after {
     width: 28px;
     height: 19px;
     background-position: -298px -5px;
     margin: 19px 14px 0;
 }
-.content-ico_file:after{
+
+.content-ico_file:after {
     width: 16px;
     height: 21px;
     background-position: -168px -5px;
     margin: 20px 20px 0;
 }
-.place{
+
+.place {
     font-family: 'Open Sans Semibold', sans-serif;
 }
