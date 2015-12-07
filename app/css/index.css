@@ -1,7 +1,8 @@
 .content-block__container_list {
     padding: 18px 41px;
 }
-.content-block__container_info{
+
+.content-block__container_info {
     padding-bottom: 29px;
 }
 
@@ -134,8 +135,9 @@
     display: none;
 }
 
-.content-ico {
+.place:before {
     display: block;
+    content: '';
     width: 54px;
     height: 54px;
     border-radius: 50%;
@@ -148,39 +150,48 @@
     0 1px 0 0 #fff;
 }
 
-.content-ico:after {
+.place:after {
     display: block;
     content: '';
+    position: absolute;
     background-image: url(../img/spritesheet.png);
     background-repeat: no-repeat;
 }
 
-.content-ico_case:after {
+.place_work:after {
     width: 22px;
     height: 20px;
     background-position: -5px -5px;
-    margin: 18px 16px 0;
+    top: 50%;
+    left: 17px;
+    margin-top: -8px;
 }
 
-.content-ico_school:after {
+.place_school:after {
     width: 22px;
     height: 22px;
     background-position: -365px -5px;
-    margin: 18px 18px 0;
+    top: 50%;
+    left: 17px;
+    margin-top: -9px;
 }
 
-.content-ico_graduate:after {
+.place_graduate:after {
     width: 28px;
     height: 19px;
     background-position: -298px -5px;
-    margin: 19px 14px 0;
+    top: 50%;
+    left: 13px;
+    margin-top: -8px;
 }
 
-.content-ico_file:after {
+.place_file:after {
     width: 16px;
     height: 21px;
     background-position: -168px -5px;
-    margin: 20px 20px 0;
+    top: 50%;
+    left: 19px;
+    margin-top: -7px;
 }
 
 .place {

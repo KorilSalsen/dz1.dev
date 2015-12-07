@@ -18,6 +18,8 @@
 
 .work__img-wrapper {
     display: block;
+    height: 119px;
+    overflow: hidden;
     position: relative;
 }
 
@@ -160,5 +162,68 @@
 .work__add-link:active {
     background: -webkit-linear-gradient(bottom, #d5d3d2 0%, #fbf9f9 94%, #ffffff 100%);
     background: linear-gradient(to top, #d5d3d2 0%, #fbf9f9 94%, #ffffff 100%);
+}
+
+.popup-back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(114, 112, 112, 0.72);
+    z-index: 2;
+    cursor: pointer;
+    display: none;
+}
+
+.content-block__container_popup {
+    width: 320px;
+    padding: 21px;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -231px 0 0 -161px;
+    cursor: default;
+}
+
+.input__text_popup {
+    width: 320px;
+    content: '';
+}
+
+.input__text_textarea-popup {
+    height: 111px;
+}
+
+.input__label_popup {
+    padding-bottom: 11px;
+}
+
+.input_popup {
+    margin-bottom: 9px;
+}
+
+.input__button_submit-popup {
+    float: none;
+    margin: 13px auto 0;
+}
+
+.popup-close {
+    font-size: 0;
+    position: absolute;
+    top: 7px;
+    right: 6px;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    background-image: url(../img/spritesheet.png);
+    background-repeat: no-repeat;
+    background-position: -431px -31px;
+}
+
+.form-title_popup {
+    color: #f8f7f6;
+    top: -21px;
 }
 

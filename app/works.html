@@ -14,6 +14,33 @@
 </head>
 <body>
     <div class="page-wrapper">
+        <!--Попап-->
+        <div class="popup-back">
+            <div class="content-block__container content-block__container_popup">
+                <p class="form-title form-title_popup">Добавление проекта</p>
+                <div class="popup-close">Close</div>
+                <form action="" class="popup-form">
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="name-of-work">Название проекта</label>
+                        <input id="name-of-work" class="input__text input__text_popup" type="text" placeholder="Введите название">
+                    </div>
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="pic-of-work">Картинка проекта</label>
+                        <input id="pic-of-work" class="input__text input__text_popup" type="file" placeholder="Загрузите изображение">
+                    </div>
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="link-of-work">URL проекта</label>
+                        <input id="link-of-work" class="input__text input__text_popup" type="text" placeholder="Добавте ссылку">
+                    </div>
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="description-of-work">Описание</label>
+                        <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup" placeholder="Пара слов о Вашем проекте"></textarea>
+                    </div>
+                    <input type="submit" class="input__button input__button_submit input__button_submit-popup" value="Добавить">
+                </form>
+            </div>
+        </div>
+        <!--Хедер-->
         <header class="header">
             <div class="header__wrapper">
                 <a href="/" title="LoftSchool. Корченов Илья" class="logo">
@@ -27,6 +54,7 @@
                 </ul>
             </div>
         </header>
+        <!--Страница-->
         <div class="page cf">
             <aside class="sidebar">
                 <!-- Меню-->
@@ -133,5 +161,9 @@
         </div>
     </footer>
     <script src="bower/jquery/dist/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <!--[if IE 8]>
+        <script src="bower/placeholder.js/js/jquery.placeholder.js"></script>
+    <![endif]-->
 </body>
 </html>

@@ -52,7 +52,7 @@
     background: #fff;
 }
 
-.content-ico {
+.place:before {
     background: none;
 }
 
@@ -111,16 +111,16 @@
     background: #37c06a;
 }
 
-.input__button_submit, .login-form__submit {
+.input__button_submit {
     border: 1px solid #3aa087;
     background: #4abb9f;
 }
 
-.input__button_submit:hover, .login-form__submit:hover {
+.input__button_submit:hover {
     background: #5dceb2;
 }
 
-.input__button_submit:active, .login-form__submit:active {
+.input__button_submit:active {
     background: #4ce0c6;
 }
 
@@ -137,11 +137,11 @@
     background: #e9e7e6;
 }
 
-.input-wrapper_pass {
+.input_login-pass {
     margin-bottom: 0;
 }
 
-.login-form__text {
+.input__text_login {
     font-family: sans-serif;
 }
 
@@ -160,4 +160,17 @@
 
 .login-form__checkbox-label:before {
     display: none;
+}
+
+.popup-back {
+    background: transparent;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#72707072, endColorstr=#72707072);
+    zoom: 1;
+}
+
+.popup-back:after {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 100%;
 }
