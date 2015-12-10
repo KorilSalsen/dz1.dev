@@ -111,6 +111,14 @@
     background: #37c06a;
 }
 
+.work__add-link_ico:before {
+    display: none;
+}
+
+.input__text {
+    background: #fff;
+}
+
 .input__button_submit {
     border: 1px solid #3aa087;
     background: #4abb9f;
@@ -173,4 +181,25 @@
     content: '';
     width: 100%;
     height: 100%;
+}
+
+.input__text_upload {
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+.fake-upload-button {
+    background: #e9e6e5;
+}
+
+.fake-upload-button:hover {
+    background: #d7d4d3;
+}
+
+.fake-upload-button:active {
+    background: #e9e6e5;
+}
+.input__text_no-valid{
+    border-color: #CB6945;
 }

@@ -33,7 +33,6 @@ gulp.task('server', function(){
 //Watch
 gulp.task('watch', function(){
     gulp.watch('css/*.css', ['concat']);
-    gulp.watch('app/css/*.css', ['prefix']);
     gulp.watch([
         'app/*.html',
         'app/js/*.js',

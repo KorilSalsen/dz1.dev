@@ -2,6 +2,7 @@
 <html lang="ru-RU">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="bower/normalize-css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
@@ -58,21 +59,21 @@
                             <div class="input-wrapper cf">
                                 <div class="input input_name">
                                     <label for="name" class="input__label input__label_name">Имя</label>
-                                    <input id="name" class="input__text input__text_name" type="text" name="name" placeholder="Как к вам обращаться?">
+                                    <input id="name" class="input__text input__text_name" type="text" name="feedback-name" placeholder="Как к вам обращаться?">
                                 </div>
                                 <div class="input input_email">
                                     <label for="email" class="input__label input__label_email">Email</label>
-                                    <input id="email" class="input__text input__text_email" type="email" name="email" placeholder="Куда мне писать?">
+                                    <input id="email" class="input__text input__text_email" type="email" name="feedback-email" placeholder="Куда мне писать?">
                                 </div>
                             </div>
                             <div class="input input_message">
                                 <label for="message" class="input__label">Сообщение</label>
-                                <textarea id="message" class="input__text input__text_textarea" name="message" placeholder="Кратко в чем суть"></textarea>
+                                <textarea id="message" class="input__text input__text_textarea" name="feedback-message" placeholder="Кратко в чем суть"></textarea>
                             </div>
                             <div class="input input_captcha">
                                 <label for="captcha" class="input__label">Введите код, указанный на картинке</label>
                                 <img src="img/captcha.jpg" alt="captcha" class="input__captcha">
-                                <input id="captcha" class="input__text input__text_captcha" type="text" name="captcha" placeholder="Введите код">
+                                <input id="captcha" class="input__text input__text_captcha" type="text" name="feedback-captcha" placeholder="Введите код">
                             </div>
                             <div class="input input_buttons cf">
                                 <input type="submit" class="input__button input__button_submit" value="Отправить">

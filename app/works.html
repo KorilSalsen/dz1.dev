@@ -2,6 +2,7 @@
 <html lang="ru-RU">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="bower/normalize-css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
@@ -22,19 +23,35 @@
                 <form action="" class="popup-form">
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="name-of-work">Название проекта</label>
-                        <input id="name-of-work" class="input__text input__text_popup" type="text" placeholder="Введите название">
+                        <input id="name-of-work" class="input__text input__text_popup" type="text" name="work-title" placeholder="Введите название">
+                        <div class="tooltip cf">
+                            <div class="tooltip__text">введите название</div>
+                        </div>
                     </div>
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="pic-of-work">Картинка проекта</label>
-                        <input id="pic-of-work" class="input__text input__text_popup" type="file" placeholder="Загрузите изображение">
+                        <label for="pic-of-work" class="upload-label-wrapper">
+                            <span class="input__text input__text_fake-upload">Загрузите изображение</span>
+                            <span class="fake-upload-button">Обзор</span>
+                            <input id="pic-of-work" class="input__text input__text_upload" type="file" name="work-pic" placeholder="Загрузите изображение">
+                        </label>
+                        <div class="tooltip cf">
+                            <div class="tooltip__text">изображение</div>
+                        </div>
                     </div>
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="link-of-work">URL проекта</label>
-                        <input id="link-of-work" class="input__text input__text_popup" type="text" placeholder="Добавте ссылку">
+                        <input id="link-of-work" class="input__text input__text_popup" type="text" name="work-url" placeholder="Добавте ссылку">
+                        <div class="tooltip cf">
+                            <div class="tooltip__text">ссылка на проект</div>
+                        </div>
                     </div>
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="description-of-work">Описание</label>
-                        <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup" placeholder="Пара слов о Вашем проекте"></textarea>
+                        <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup"  name="work-description"placeholder="Пара слов о Вашем проекте"></textarea>
+                        <div class="tooltip cf">
+                            <div class="tooltip__text">описание проекта</div>
+                        </div>
                     </div>
                     <input type="submit" class="input__button input__button_submit input__button_submit-popup" value="Добавить">
                 </form>
@@ -143,8 +160,7 @@
                             </li>
                             <!--Добавление работы-->
                             <li class="work work_add">
-                                <a href="" class="work__add-link" title="Добавить проект">
-                                    <i class="content-ico content-ico_photo"></i>
+                                <a href="" class="work__add-link work__add-link_ico" title="Добавить проект">
                                     <p class="work__add-text">Добавить проект</p>
                                 </a>
                             </li>
