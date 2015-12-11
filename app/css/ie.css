@@ -170,20 +170,20 @@
     display: none;
 }
 
-.popup-back {
+.popup {
     background: transparent;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#72707072, endColorstr=#72707072);
     zoom: 1;
 }
 
-.popup-back:after {
+.popup:after {
     display: block;
     content: '';
     width: 100%;
     height: 100%;
 }
 
-.input__text_upload {
+.input__upload {
     display: block;
     width: 0;
     height: 0;
@@ -200,6 +200,7 @@
 .fake-upload-button:active {
     background: #e9e6e5;
 }
-.input__text_no-valid{
+
+.input__text_no-valid {
     border-color: #CB6945;
 }

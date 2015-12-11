@@ -1,69 +1,96 @@
 'use strict';
 
-;
-(function () {
-    var form = $('form');
-    //Popup
-    var popup = $('.popup-back');
+var projectModule = function () {
+    var forms = $('form'),
+        popups = $('.popup'),
+        popupButtons = $('.popup-button'),
+        fileUploads = $(".input__upload"),
+        resetButtons = $('[type="reset"]'),
+        time = 300;
 
-    $('.work__add-link').on('click', function (e) {
-        e.preventDefault();
+    var _eventListener = function () {
+        popupButtons.on('click', _popupSwitcher.show);
+        popups.on('click', _popupSwitcher.hide);
+        fileUploads.on('change', _fileUploadFix);
+        forms.on('submit', _validator);
+        resetButtons.on('click', _cleanForm);
+    };
 
-        popup.fadeIn(300);
-    });
+    var _cleanForm = function (e) {
+        var thisForm = $(e.target).closest('form'),
+            inputs = thisForm.find('.input__text'),
+            tooltips = thisForm.find('.tooltip');
 
-    popup.on('click', function (e) {
-        var $this = $(e.target);
+        inputs.removeClass('input__text_no-valid');
+        tooltips.hide();
+    };
 
-        if ($this[0] == popup[0] || $this[0] == $('.popup-close')[0]) {
-            e.preventDefault();
+    var _popupSwitcher = {
+        show: function (e) {
+            e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
-            popup.fadeOut(300);
+            var popupData = $(e.target).closest('.popup-button').data('popup');
 
-            form[0].reset();
-            fakeInputUpload.removeClass('file-selected').text(defaultText);
-            form.find('.input__text').removeClass('input__text_no-valid');
-            form.find('.tooltip').hide(0);
+            popups.filter('[data-popup="' + popupData + '"]').fadeIn(time);
+        },
+        hide: function (e) {
+            var $this = $(e.target),
+                thisPopup = $this.closest('.popup'),
+                form = thisPopup.find('form');
+
+            if ($this.hasClass('popup') || $this.hasClass('popup-close')) {
+                e.preventDefault();
+
+                thisPopup.fadeOut(time);
+
+                if (form.length) {
+                    var inputs = form.find('.input__text'),
+                        tooltips = form.find('.tooltip');
+
+                    form.each(function (i) {
+                        form.eq(i)[0].reset();
+                    });
+
+                    inputs.removeClass('input__text_no-valid');
+                    tooltips.hide();
+                }
+            }
         }
-    });
+    };
 
-    //File-upload
-    var fileUpload = $("#pic-of-work"),
-        fakeInputUpload = $('.input__text_fake-upload'),
-        defaultText = fakeInputUpload.text();
+    var _fileUploadFix = function (e) {
+        var file_api = ( window.File && window.FileReader && window.FileList && window.Blob ) ? true : false,
+            file_name,
+            thisUploadWrapper = $(e.target).closest('.input_popup'),
+            fileUploadInput = thisUploadWrapper.find('.input__upload'),
+            fakeFileUploadInput = thisUploadWrapper.find('.input__fake-upload');
 
-    var file_api = ( window.File && window.FileReader && window.FileList && window.Blob ) ? true : false;
-
-    fileUpload.change(function () {
-        var file_name;
-
-        if (file_api && fileUpload[0].files[0]) {
-            file_name = fileUpload[0].files[0].name;
+        if (file_api && fileUploadInput[0].files[0]) {
+            file_name = fileUploadInput[0].files[0].name;
         } else {
-            file_name = fileUpload.val().replace("C:\\fakepath\\", '');
+            file_name = fileUploadInput.val().replace("C:\\fakepath\\", '');
         }
 
         if (!file_name.length) return;
 
-        fakeInputUpload.addClass('file-selected')
-            .text(file_name)
+        fakeFileUploadInput.val(file_name)
             .removeClass('input__text_no-valid')
-            .parent().siblings('.tooltip').fadeOut(500);
-    }).change();
+            .siblings('.tooltip').fadeOut(time);
+    };
 
-    //Tooltip
-    form.submit(function (e) {
-        e.preventDefault();
+    var _validator = function (e) {
+        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
         var form = $(e.target),
             inputs = form.find('.input__text'),
             readyToSend = true;
 
-        for (var i = 0; i < inputs.length; i++) {
+        inputs.each(function (i) {
+
             var input = inputs.eq(i),
                 type = input.attr('type');
 
-            if (!input.hasClass('input__text_fake-upload') && !input.hasClass('input__text_upload')) {
+            if (type !== 'file') {
 
                 input.focus(function (e) {
                     var $this = $(e.target);
@@ -72,24 +99,27 @@
 
                         $this.keydown(function () {
                             $this.removeClass('input__text_no-valid')
-                                .siblings('.tooltip').fadeOut(500);
+                                .siblings('.tooltip').fadeOut(time);
                         });
                     }
                 });
 
                 if (!input.val()) {
                     input.addClass('input__text_no-valid')
-                        .siblings('.tooltip').fadeIn(500);
-                    readyToSend = false;
-                }
+                        .siblings('.tooltip').fadeIn(time);
 
-            } else if (input.hasClass('input__text_upload')) {
-                if (!input.val()) {
-                    input.siblings('.input__text_fake-upload').addClass('input__text_no-valid')
-                        .parent().siblings('.tooltip').fadeIn(500);
                     readyToSend = false;
                 }
             }
+        });
+    };
+
+    return {
+        init: function () {
+            _eventListener();
         }
-    });
-})();
+    };
+};
+
+projectModule().init();
+

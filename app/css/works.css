@@ -160,7 +160,7 @@
     margin-left: -10px;
 }
 
-.popup-back {
+.popup {
     position: absolute;
     top: 0;
     right: 0;
@@ -185,7 +185,6 @@
 
 .input__text_popup {
     width: 320px;
-    content: '';
 }
 
 .input__text_textarea-popup {
@@ -198,6 +197,7 @@
 
 .input_popup {
     margin-bottom: 9px;
+    line-height: 0;
 }
 
 .input__button_submit-popup {
@@ -223,7 +223,7 @@
     top: -21px;
 }
 
-.input__text_upload {
+.input__upload {
     display: none;
 }
 
@@ -232,12 +232,24 @@
     position: relative;
 }
 
-.input__text_fake-upload {
-    color: #aeadad;
+.input-tooltip-wrapper_fake {
+    line-height: 0;
+}
+
+.fake-input-wrapper:before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: text;
+}
+
+.input__fake-upload {
     width: 268px;
     border-radius: 4px 0 0 4px;
-    position: relative;
-    cursor: text;
 }
 
 .fake-upload-button {

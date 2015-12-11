@@ -15,48 +15,6 @@
 </head>
 <body>
     <div class="page-wrapper">
-        <!--Попап-->
-        <div class="popup-back">
-            <div class="content-block__container content-block__container_popup">
-                <p class="form-title form-title_popup">Добавление проекта</p>
-                <div class="popup-close">Close</div>
-                <form action="" class="popup-form">
-                    <div class="input input_popup">
-                        <label class="input__label input__label_popup" for="name-of-work">Название проекта</label>
-                        <input id="name-of-work" class="input__text input__text_popup" type="text" name="work-title" placeholder="Введите название">
-                        <div class="tooltip cf">
-                            <div class="tooltip__text">введите название</div>
-                        </div>
-                    </div>
-                    <div class="input input_popup">
-                        <label class="input__label input__label_popup" for="pic-of-work">Картинка проекта</label>
-                        <label for="pic-of-work" class="upload-label-wrapper">
-                            <span class="input__text input__text_fake-upload">Загрузите изображение</span>
-                            <span class="fake-upload-button">Обзор</span>
-                            <input id="pic-of-work" class="input__text input__text_upload" type="file" name="work-pic" placeholder="Загрузите изображение">
-                        </label>
-                        <div class="tooltip cf">
-                            <div class="tooltip__text">изображение</div>
-                        </div>
-                    </div>
-                    <div class="input input_popup">
-                        <label class="input__label input__label_popup" for="link-of-work">URL проекта</label>
-                        <input id="link-of-work" class="input__text input__text_popup" type="text" name="work-url" placeholder="Добавте ссылку">
-                        <div class="tooltip cf">
-                            <div class="tooltip__text">ссылка на проект</div>
-                        </div>
-                    </div>
-                    <div class="input input_popup">
-                        <label class="input__label input__label_popup" for="description-of-work">Описание</label>
-                        <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup"  name="work-description"placeholder="Пара слов о Вашем проекте"></textarea>
-                        <div class="tooltip cf">
-                            <div class="tooltip__text">описание проекта</div>
-                        </div>
-                    </div>
-                    <input type="submit" class="input__button input__button_submit input__button_submit-popup" value="Добавить">
-                </form>
-            </div>
-        </div>
         <!--Хедер-->
         <header class="header">
             <div class="header__wrapper">
@@ -64,9 +22,9 @@
                     <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
                 </a>
                 <ul class="social-list cf">
-                    <li class="social-list__item facebook"><a href="" class="socials" title="Facebook" target="_blank">Facebook</a></li>
+                    <li class="social-list__item facebook"><a href="https://www.facebook.com" class="socials" title="Facebook" target="_blank">Facebook</a></li>
                     <li class="social-list__item vk"><a href="https://vk.com/id44931502" class="socials" title="Вконтакте" target="_blank">Вконтакте</a></li>
-                    <li class="social-list__item twitter"><a href="" class="socials" title="Twitter" target="_blank">Twitter</a></li>
+                    <li class="social-list__item twitter"><a href="https://twitter.com/" class="socials" title="Twitter" target="_blank">Twitter</a></li>
                     <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub" target="_blank">GitHub</a></li>
                 </ul>
             </div>
@@ -160,7 +118,7 @@
                             </li>
                             <!--Добавление работы-->
                             <li class="work work_add">
-                                <a href="" class="work__add-link work__add-link_ico" title="Добавить проект">
+                                <a href="" class="work__add-link work__add-link_ico popup-button" data-popup="new-project" title="Добавить проект">
                                     <p class="work__add-text">Добавить проект</p>
                                 </a>
                             </li>
@@ -169,7 +127,64 @@
                 </article>
             </section>
         </div>
+        <!--Попап-->
+        <div class="popup" data-popup="new-project">
+            <div class="content-block__container content-block__container_popup">
+                <p class="form-title form-title_popup">Добавление проекта</p>
+                <div class="popup-close">Close</div>
+                <!--Форма-->
+                <form action="" class="popup-form">
+                    <!--Название-->
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="name-of-work">Название проекта</label>
+                        <div class="input-tooltip-wrapper">
+                            <input id="name-of-work" class="input__text input__text_popup" type="text" name="work-title" placeholder="Введите название">
+                            <div class="tooltip tooltip_right cf">
+                                <div class="tooltip__text">введите название</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Картинка-->
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="pic-of-work">Картинка проекта</label>
+                        <label for="pic-of-work" class="upload-label-wrapper">
+                            <div class="input-tooltip-wrapper input-tooltip-wrapper_fake">
+                                <input class="input__text input__fake-upload" type="text" placeholder="Загрузите изображение">
+                                <div class="tooltip tooltip_right cf">
+                                    <div class="tooltip__text">изображение</div>
+                                </div>
+                            </div>
+                            <span class="fake-upload-button">Обзор</span>
+                            <input id="pic-of-work" class="input__upload" type="file" name="work-pic" placeholder="Загрузите изображение">
+                        </label>
+                    </div>
+                    <!--Ссылка-->
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="link-of-work">URL проекта</label>
+                        <div class="input-tooltip-wrapper">
+                            <input id="link-of-work" class="input__text input__text_popup" type="text" name="work-url" placeholder="Добавте ссылку">
+                            <div class="tooltip tooltip_right cf">
+                                <div class="tooltip__text">ссылка на проект</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Описание-->
+                    <div class="input input_popup">
+                        <label class="input__label input__label_popup" for="description-of-work">Описание</label>
+                        <div class="input-tooltip-wrapper">
+                            <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup"  name="work-description"placeholder="Пара слов о Вашем проекте"></textarea>
+                            <div class="tooltip tooltip_right cf">
+                                <div class="tooltip__text">описание проекта</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Кнопка-->
+                    <input type="submit" class="input__button input__button_submit input__button_submit-popup" value="Добавить">
+                </form>
+            </div>
+        </div>
     </div>
+    <!--Футер-->
     <footer class="footer">
         <div class="copyright">
             <a href="login.html" class="enter">вход</a>

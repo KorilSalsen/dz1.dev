@@ -22,9 +22,9 @@
                     <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
                 </a>
                 <ul class="social-list cf">
-                    <li class="social-list__item facebook"><a href="" class="socials" title="Facebook" target="_blank">Facebook</a></li>
+                    <li class="social-list__item facebook"><a href="https://www.facebook.com" class="socials" title="Facebook" target="_blank">Facebook</a></li>
                     <li class="social-list__item vk"><a href="https://vk.com/id44931502" class="socials" title="Вконтакте" target="_blank">Вконтакте</a></li>
-                    <li class="social-list__item twitter"><a href="" class="socials" title="Twitter" target="_blank">Twitter</a></li>
+                    <li class="social-list__item twitter"><a href="https://twitter.com/" class="socials" title="Twitter" target="_blank">Twitter</a></li>
                     <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub" target="_blank">GitHub</a></li>
                 </ul>
             </div>
@@ -55,26 +55,53 @@
                 <article class="content-block">
                     <h3 class="content-block__tittle">У вас интересный проект? Напишите мне</h3>
                     <div class="content-block__container content-block__container_feedback cf">
+                        <!--Форма-->
                         <form action="" class="feedback-form">
+                            <!--Имя и email-->
                             <div class="input-wrapper cf">
+                                <!--Имя-->
                                 <div class="input input_name">
-                                    <label for="name" class="input__label input__label_name">Имя</label>
-                                    <input id="name" class="input__text input__text_name" type="text" name="feedback-name" placeholder="Как к вам обращаться?">
+                                    <label for="name" class="input__label input__label_feedback">Имя</label>
+                                    <div class="input-tooltip-wrapper">
+                                        <input id="name" class="input__text input__text_name" type="text" name="feedback-name" placeholder="Как к вам обращаться?">
+                                        <div class="tooltip tooltip_right cf">
+                                            <div class="tooltip__text">введите имя</div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!--Email-->
                                 <div class="input input_email">
-                                    <label for="email" class="input__label input__label_email">Email</label>
-                                    <input id="email" class="input__text input__text_email" type="email" name="feedback-email" placeholder="Куда мне писать?">
+                                    <label for="email" class="input__label input__label_feedback">Email</label>
+                                    <div class="input-tooltip-wrapper">
+                                        <input id="email" class="input__text input__text_email" type="email" name="feedback-email" placeholder="Куда мне писать?">
+                                        <div class="tooltip tooltip_left cf">
+                                            <div class="tooltip__text tooltip__text_left">введите email</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!--Сообщение-->
                             <div class="input input_message">
                                 <label for="message" class="input__label">Сообщение</label>
-                                <textarea id="message" class="input__text input__text_textarea" name="feedback-message" placeholder="Кратко в чем суть"></textarea>
+                                <div class="input-tooltip-wrapper">
+                                    <textarea id="message" class="input__text input__text_textarea" name="feedback-message" placeholder="Кратко в чем суть"></textarea>
+                                    <div class="tooltip tooltip_right cf">
+                                        <div class="tooltip__text">ваш вопрос</div>
+                                    </div>
+                                </div>
                             </div>
+                            <!--Капча-->
                             <div class="input input_captcha">
                                 <label for="captcha" class="input__label">Введите код, указанный на картинке</label>
                                 <img src="img/captcha.jpg" alt="captcha" class="input__captcha">
-                                <input id="captcha" class="input__text input__text_captcha" type="text" name="feedback-captcha" placeholder="Введите код">
+                                <div class="input-tooltip-wrapper input-tooltip-wrapper_captcha">
+                                    <input id="captcha" class="input__text input__text_captcha" type="text" name="feedback-captcha" placeholder="Введите код">
+                                    <div class="tooltip tooltip_left cf" >
+                                        <div class="tooltip__text tooltip__text_left">код капчи</div>
+                                    </div>
+                                </div>
                             </div>
+                            <!--Кнопки-->
                             <div class="input input_buttons cf">
                                 <input type="submit" class="input__button input__button_submit" value="Отправить">
                                 <input type="reset" class="input__button input__button_reset" value="Сбросить">
@@ -85,6 +112,7 @@
             </section>
         </div>
     </div>
+    <!--Футер-->
     <footer class="footer">
         <div class="copyright">
             <a href="login.html" class="enter">вход</a>
@@ -92,6 +120,7 @@
         </div>
     </footer>
     <script src="bower/jquery/dist/jquery.min.js"></script>
+    <script src="js/main.js"></script>
     <!--[if IE 8]>
         <script src="bower/placeholder.js/js/jquery.placeholder.js"></script>
     <![endif]-->
