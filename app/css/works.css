@@ -232,8 +232,9 @@
     position: relative;
 }
 
-.input-tooltip-wrapper_fake {
+.fake-input-wrapper {
     line-height: 0;
+    display: block;
 }
 
 .fake-input-wrapper:before {

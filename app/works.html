@@ -137,23 +137,15 @@
                     <!--Название-->
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="name-of-work">Название проекта</label>
-                        <div class="input-tooltip-wrapper">
-                            <input id="name-of-work" class="input__text input__text_popup" type="text" name="work-title" placeholder="Введите название">
-                            <div class="tooltip tooltip_right cf">
-                                <div class="tooltip__text">введите название</div>
-                            </div>
-                        </div>
+                        <input id="name-of-work" class="input__text input__text_popup" type="text" name="work-title" placeholder="Введите название" data-tooltip="введите название">
                     </div>
                     <!--Картинка-->
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="pic-of-work">Картинка проекта</label>
                         <label for="pic-of-work" class="upload-label-wrapper">
-                            <div class="input-tooltip-wrapper input-tooltip-wrapper_fake">
-                                <input class="input__text input__fake-upload" type="text" placeholder="Загрузите изображение">
-                                <div class="tooltip tooltip_right cf">
-                                    <div class="tooltip__text">изображение</div>
-                                </div>
-                            </div>
+                            <span class="fake-input-wrapper ">
+                                <input class="input__text input__fake-upload" type="text" placeholder="Загрузите изображение" readonly data-tooltip="картинка">
+                            </span>
                             <span class="fake-upload-button">Обзор</span>
                             <input id="pic-of-work" class="input__upload" type="file" name="work-pic" placeholder="Загрузите изображение">
                         </label>
@@ -161,22 +153,12 @@
                     <!--Ссылка-->
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="link-of-work">URL проекта</label>
-                        <div class="input-tooltip-wrapper">
-                            <input id="link-of-work" class="input__text input__text_popup" type="text" name="work-url" placeholder="Добавте ссылку">
-                            <div class="tooltip tooltip_right cf">
-                                <div class="tooltip__text">ссылка на проект</div>
-                            </div>
-                        </div>
+                        <input id="link-of-work" class="input__text input__text_popup" type="text" name="work-url" placeholder="Добавте ссылку" data-tooltip="ссылка на проект">
                     </div>
                     <!--Описание-->
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="description-of-work">Описание</label>
-                        <div class="input-tooltip-wrapper">
-                            <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup"  name="work-description"placeholder="Пара слов о Вашем проекте"></textarea>
-                            <div class="tooltip tooltip_right cf">
-                                <div class="tooltip__text">описание проекта</div>
-                            </div>
-                        </div>
+                        <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup"  name="work-description"placeholder="Пара слов о Вашем проекте" data-tooltip="описание проекта"></textarea>
                     </div>
                     <!--Кнопка-->
                     <input type="submit" class="input__button input__button_submit input__button_submit-popup" value="Добавить">

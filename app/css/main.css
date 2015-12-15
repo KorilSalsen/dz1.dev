@@ -103,7 +103,10 @@ ul {
   position: relative;
 }
 
-.input__captcha {
+.input__captcha-img {
+  position: absolute;
+  top: 23px;
+  left: 0;
   display: block;
   border: 1px solid #d6d4d3;
   width: 189px;
@@ -204,13 +207,8 @@ ul {
 .tooltip {
   display: none;
   position: absolute;
-  width: 1000px;
   top: 50%;
-  margin-top: -16px;
-}
-
-.tooltip__text {
-  float: right;
+  margin-top: -15px;
   height: 29px;
   line-height: 27px;
   vertical-align: middle;
@@ -219,11 +217,9 @@ ul {
   font-size: 12px;
   font-family: 'Open Sans Semibold', sans-serif;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
-  margin-right: 17px;
-  position: relative;
 }
 
-.tooltip__text:before {
+.tooltip:before {
   display: block;
   content: '';
   position: absolute;
@@ -234,7 +230,7 @@ ul {
   background: url("../img/tooltip-back-left.png");
 }
 
-.tooltip__text:after {
+.tooltip:after {
   display: block;
   content: '';
   position: absolute;
@@ -246,27 +242,19 @@ ul {
 }
 
 .tooltip_right {
-  left: -1000px;
-}
-
-.tooltip_left {
-  right: -1000px;
-}
-
-.tooltip__text_left {
   float: left;
   margin-right: 0;
   margin-left: 17px;
 }
 
-.tooltip__text_left:before {
+.tooltip_right:before {
   left: -13px;
   height: 29px;
   width: 13px;
   background: url("../img/tooltip-back-right-mirror.png");
 }
 
-.tooltip__text_left:after {
+.tooltip_right:after {
   right: -7px;
   height: 29px;
   width: 7px;
@@ -277,16 +265,10 @@ ul {
   position: relative;
 }
 
-.input-tooltip-wrapper_captcha {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  margin-top: -7px;
-}
-
 .input__text_captcha {
   height: 32px;
   padding: 9px;
+  margin: 21px 0 58px 211px;
 }
 .content {
   float: right;

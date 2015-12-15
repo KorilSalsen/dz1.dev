@@ -6,7 +6,8 @@ var projectModule = function () {
         popupButtons = $('.popup-button'),
         fileUploads = $(".input__upload"),
         resetButtons = $('[type="reset"]'),
-        time = 300;
+        time = 300,
+        picTypes = ['.jpg', '.jpeg', '.png', '.bmp'];
 
     var _eventListener = function () {
         popupButtons.on('click', _popupSwitcher.show);
@@ -59,44 +60,71 @@ var projectModule = function () {
     };
 
     var _fileUploadFix = function (e) {
-        var file_api = ( window.File && window.FileReader && window.FileList && window.Blob ) ? true : false,
-            file_name,
+        var fileApi = ( window.File && window.FileReader && window.FileList && window.Blob ) ? true : false,
+            fileName,
             thisUploadWrapper = $(e.target).closest('.input_popup'),
             fileUploadInput = thisUploadWrapper.find('.input__upload'),
             fakeFileUploadInput = thisUploadWrapper.find('.input__fake-upload');
 
-        if (file_api && fileUploadInput[0].files[0]) {
-            file_name = fileUploadInput[0].files[0].name;
+        if (fileApi && fileUploadInput[0].files[0]) {
+            fileName = fileUploadInput[0].files[0].name;
         } else {
-            file_name = fileUploadInput.val().replace("C:\\fakepath\\", '');
+            fileName = fileUploadInput.val().replace("C:\\fakepath\\", '');
         }
 
-        if (!file_name.length) return;
+        if (!fileName.length) return;
 
-        fakeFileUploadInput.val(file_name)
-            .removeClass('input__text_no-valid')
-            .siblings('.tooltip').fadeOut(time);
+        var fileType = fileName.slice(fileName.lastIndexOf('.'));
+
+        if (picTypes.indexOf(fileType) === -1) {
+            fakeFileUploadInput.val(fileName)
+                .addClass('input__text_no-valid')
+                .siblings('.tooltip').fadeIn(time);
+        } else {
+            fakeFileUploadInput.val(fileName)
+                .removeClass('input__text_no-valid')
+                .siblings('.tooltip').fadeOut(time);
+        }
     };
 
     var _validator = function (e) {
         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
         var form = $(e.target),
-            inputs = form.find('.input__text'),
-            readyToSend = true;
+            inputs = form.find('.input__text');
 
         inputs.each(function (i) {
-
             var input = inputs.eq(i),
-                type = input.attr('type');
+                type = input.attr('type'),
+                tooltipText = input.data('tooltip'),
+                tooltipPosition = input.data('tooltip-position'),
+                inputWrapper = $('<div></div>', {
+                    'class': 'input-tooltip-wrapper'
+                }),
+                tooltipBlock = $('<div></div>', {
+                    'class': 'tooltip'
+                }).text(tooltipText);
+
+            if (!input.siblings('.tooltip').length) {
+                input.wrap(inputWrapper)
+                    .after(tooltipBlock);
+
+                if (tooltipPosition === 'right') {
+                    tooltipBlock.css({
+                        right: -tooltipBlock.width() - 17
+                    }).addClass('tooltip_right');
+                } else {
+                    tooltipBlock.css({
+                        left: -tooltipBlock.width() - 17
+                    });
+                }
+            }
 
             if (type !== 'file') {
-
                 input.focus(function (e) {
                     var $this = $(e.target);
 
                     if ($this.hasClass('input__text_no-valid')) {
-
                         $this.keydown(function () {
                             $this.removeClass('input__text_no-valid')
                                 .siblings('.tooltip').fadeOut(time);
@@ -107,11 +135,28 @@ var projectModule = function () {
                 if (!input.val()) {
                     input.addClass('input__text_no-valid')
                         .siblings('.tooltip').fadeIn(time);
-
-                    readyToSend = false;
                 }
             }
         });
+
+        if (!form.find('.input__text_no-valid').length) {
+            _ajaxAddWork(form);
+        }
+    };
+
+    var _ajaxAddWork = function (form) {
+        var formData = new FormData(form[0]);
+
+        $.ajax({
+            type: "POST",
+            processData: false,
+            contentType: false,
+            url: "php/add-work.php",
+            data: formData
+        })
+            .done(function (data) {
+                console.log(data);
+            });
     };
 
     return {
