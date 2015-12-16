@@ -17,7 +17,6 @@ body {
   font-family: 'Open Sans Regular', sans-serif;
   color: #727070;
   font-size: 14px;
-  overflow-x: hidden;
 }
 
 ul {
@@ -212,7 +211,9 @@ ul {
   height: 29px;
   line-height: 27px;
   vertical-align: middle;
-  background: url("../img/tooltip-back-center.png");
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: 0px -79px;
   color: #9a4e32;
   font-size: 12px;
   font-family: 'Open Sans Semibold', sans-serif;
@@ -227,7 +228,9 @@ ul {
   left: -7px;
   height: 29px;
   width: 7px;
-  background: url("../img/tooltip-back-left.png");
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: -28px -111px;
 }
 
 .tooltip:after {
@@ -238,7 +241,9 @@ ul {
   right: -13px;
   height: 29px;
   width: 13px;
-  background: url("../img/tooltip-back-right.png");
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: -35px -111px;
 }
 
 .tooltip_right {
@@ -251,14 +256,18 @@ ul {
   left: -13px;
   height: 29px;
   width: 13px;
-  background: url("../img/tooltip-back-right-mirror.png");
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: -60px -111px;
 }
 
 .tooltip_right:after {
   right: -7px;
   height: 29px;
   width: 7px;
-  background: url("../img/tooltip-back-left-mirror.png");
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: -73px -111px;
 }
 
 .input-tooltip-wrapper {

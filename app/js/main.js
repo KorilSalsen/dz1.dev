@@ -1,42 +1,64 @@
 'use strict';
 
-var projectModule = function () {
-    var forms = $('form'),
-        popups = $('.popup'),
-        popupButtons = $('.popup-button'),
-        fileUploads = $(".input__upload"),
-        resetButtons = $('[type="reset"]'),
-        time = 300,
+var fileLoaderModule = function () {
+    var fileUploads = $(".input__upload"),
         picTypes = ['.jpg', '.jpeg', '.png', '.bmp'];
+
+    var _eventListener = function () {
+        fileUploads.on('change', _fileUploadFix);
+    };
+
+    var _fileUploadFix = function (e) {
+        var fileApi = ( window.File && window.FileReader && window.FileList && window.Blob ) ? true : false,
+            fileName,
+            thisUploadWrapper = $(e.target).closest('.input_popup'),
+            fileUploadInput = thisUploadWrapper.find('.input__upload'),
+            fakeFileUploadInput = thisUploadWrapper.find('.input__fake-upload');
+
+        if (fileApi && fileUploadInput[0].files[0]) {
+            fileName = fileUploadInput[0].files[0].name;
+        } else {
+            fileName = fileUploadInput.val().replace("C:\\fakepath\\", '');
+        }
+
+        if (!fileName.length) return;
+
+        var fileType = fileName.slice(fileName.lastIndexOf('.'));
+
+        if (picTypes.indexOf(fileType) === -1) {
+            validateModule().validateInput(fakeFileUploadInput);
+        } else {
+            fakeFileUploadInput.val(fileName);
+            validateModule().validateInput(fakeFileUploadInput);
+        }
+    };
+
+    return {
+        init: _eventListener
+    };
+};
+
+var popupModule = function () {
+    var popups = $('.popup'),
+        popupButtons = $('.popup-button'),
+        time = 300;
 
     var _eventListener = function () {
         popupButtons.on('click', _popupSwitcher.show);
         popups.on('click', _popupSwitcher.hide);
-        fileUploads.on('change', _fileUploadFix);
-        forms.on('submit', _validator);
-        resetButtons.on('click', _cleanForm);
-    };
-
-    var _cleanForm = function (e) {
-        var thisForm = $(e.target).closest('form'),
-            inputs = thisForm.find('.input__text'),
-            tooltips = thisForm.find('.tooltip');
-
-        inputs.removeClass('input__text_no-valid');
-        tooltips.hide();
     };
 
     var _popupSwitcher = {
         show: function (e) {
             e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
-            var popupData = $(e.target).closest('.popup-button').data('popup');
+            var popupName = $(this).data('popup-name');
 
-            popups.filter('[data-popup="' + popupData + '"]').fadeIn(time);
+            popups.filter('[data-popup-name="' + popupName + '"]').fadeIn(time);
         },
         hide: function (e) {
             var $this = $(e.target),
-                thisPopup = $this.closest('.popup'),
+                thisPopup = $(this),
                 form = thisPopup.find('form');
 
             if ($this.hasClass('popup') || $this.hasClass('popup-close')) {
@@ -59,88 +81,100 @@ var projectModule = function () {
         }
     };
 
-    var _fileUploadFix = function (e) {
-        var fileApi = ( window.File && window.FileReader && window.FileList && window.Blob ) ? true : false,
-            fileName,
-            thisUploadWrapper = $(e.target).closest('.input_popup'),
-            fileUploadInput = thisUploadWrapper.find('.input__upload'),
-            fakeFileUploadInput = thisUploadWrapper.find('.input__fake-upload');
+    return {
+        init: _eventListener
+    };
+};
 
-        if (fileApi && fileUploadInput[0].files[0]) {
-            fileName = fileUploadInput[0].files[0].name;
-        } else {
-            fileName = fileUploadInput.val().replace("C:\\fakepath\\", '');
+var validateModule = function () {
+    var forms = $('form'),
+        resetButtons = $('[type="reset"]'),
+        time = 300;
+
+    var _eventListener = function () {
+        forms.on('submit', _validator);
+        resetButtons.on('click', _cleanForm);
+    };
+
+    var _cleanForm = function (e) {
+        var thisForm = $(e.target).closest('form'),
+            inputs = thisForm.find('.input__text'),
+            tooltips = thisForm.find('.tooltip');
+
+        inputs.removeClass('input__text_no-valid');
+        tooltips.hide();
+    };
+
+    var _validateSwitcher = {
+        noValid: function(input){
+            input.addClass('input__text_no-valid')
+                .siblings('.tooltip').fadeIn(time);
+        },
+        valid: function(input){
+            input.removeClass('input__text_no-valid')
+                .siblings('.tooltip').fadeOut(time);
+        }
+    };
+
+    var _validateInput = function(input){
+        var type = input.attr('type'),
+            tooltipText = input.data('tooltip'),
+            tooltipPosition = input.data('tooltip-position'),
+            inputWrapper = $('<div></div>', {
+                'class': 'input-tooltip-wrapper'
+            }),
+            tooltipBlock = $('<div></div>', {
+                'class': 'tooltip'
+            }).text(tooltipText);
+
+        if (!input.siblings('.tooltip').length) {
+            input.wrap(inputWrapper)
+                .after(tooltipBlock);
+
+            if (tooltipPosition === 'right') {
+                tooltipBlock.css({
+                    right: -tooltipBlock.width() - 17
+                }).addClass('tooltip_right');
+            } else {
+                tooltipBlock.css({
+                    left: -tooltipBlock.width() - 17
+                });
+            }
         }
 
-        if (!fileName.length) return;
+        if (type !== 'file' && !input.hasClass('input__fake-upload')) {
+            input.on('focus', function (e) {
+                var thisInput = $(e.target);
 
-        var fileType = fileName.slice(fileName.lastIndexOf('.'));
+                if (thisInput.hasClass('input__text_no-valid')) {
+                    thisInput.on('keydown', function () {
+                        _validateSwitcher.valid(thisInput);
+                    });
+                }
+            });
+        }
 
-        if (picTypes.indexOf(fileType) === -1) {
-            fakeFileUploadInput.val(fileName)
-                .addClass('input__text_no-valid')
-                .siblings('.tooltip').fadeIn(time);
-        } else {
-            fakeFileUploadInput.val(fileName)
-                .removeClass('input__text_no-valid')
-                .siblings('.tooltip').fadeOut(time);
+        if (!input.val()) {
+            _validateSwitcher.noValid(input);
+        }else{
+            _validateSwitcher.valid(input)
         }
     };
 
     var _validator = function (e) {
         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
-        var form = $(e.target),
-            inputs = form.find('.input__text');
+        var thisForm = $(this),
+            inputs = thisForm.find('.input__text');
 
         inputs.each(function (i) {
-            var input = inputs.eq(i),
-                type = input.attr('type'),
-                tooltipText = input.data('tooltip'),
-                tooltipPosition = input.data('tooltip-position'),
-                inputWrapper = $('<div></div>', {
-                    'class': 'input-tooltip-wrapper'
-                }),
-                tooltipBlock = $('<div></div>', {
-                    'class': 'tooltip'
-                }).text(tooltipText);
+            var input = inputs.eq(i);
 
-            if (!input.siblings('.tooltip').length) {
-                input.wrap(inputWrapper)
-                    .after(tooltipBlock);
-
-                if (tooltipPosition === 'right') {
-                    tooltipBlock.css({
-                        right: -tooltipBlock.width() - 17
-                    }).addClass('tooltip_right');
-                } else {
-                    tooltipBlock.css({
-                        left: -tooltipBlock.width() - 17
-                    });
-                }
-            }
-
-            if (type !== 'file') {
-                input.focus(function (e) {
-                    var $this = $(e.target);
-
-                    if ($this.hasClass('input__text_no-valid')) {
-                        $this.keydown(function () {
-                            $this.removeClass('input__text_no-valid')
-                                .siblings('.tooltip').fadeOut(time);
-                        });
-                    }
-                });
-
-                if (!input.val()) {
-                    input.addClass('input__text_no-valid')
-                        .siblings('.tooltip').fadeIn(time);
-                }
-            }
+            _validateInput(input);
         });
 
-        if (!form.find('.input__text_no-valid').length) {
-            _ajaxAddWork(form);
+        if (!thisForm.find('.input__text_no-valid').length) {
+            _ajaxAddWork(thisForm);
         }
     };
 
@@ -160,11 +194,14 @@ var projectModule = function () {
     };
 
     return {
-        init: function () {
-            _eventListener();
-        }
+        init: _eventListener,
+        validateInput: _validateInput
     };
 };
 
-projectModule().init();
+fileLoaderModule().init();
+popupModule().init();
+validateModule().init();
+
+$('input, textarea').placeholder();
 

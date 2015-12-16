@@ -246,6 +246,7 @@
     right: 0;
     bottom: 0;
     cursor: text;
+    z-index: 1;
 }
 
 .input__fake-upload {
