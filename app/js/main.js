@@ -1,4 +1,5 @@
 'use strict';
+$('input, textarea').placeholder();
 
 var fileLoaderModule = function () {
     var fileUploads = $(".input__upload"),
@@ -26,6 +27,7 @@ var fileLoaderModule = function () {
         var fileType = fileName.slice(fileName.lastIndexOf('.'));
 
         if (picTypes.indexOf(fileType) === -1) {
+            fakeFileUploadInput.val('');
             validateModule().validateInput(fakeFileUploadInput);
         } else {
             fakeFileUploadInput.val(fileName);
@@ -106,17 +108,17 @@ var validateModule = function () {
     };
 
     var _validateSwitcher = {
-        noValid: function(input){
+        noValid: function (input) {
             input.addClass('input__text_no-valid')
                 .siblings('.tooltip').fadeIn(time);
         },
-        valid: function(input){
+        valid: function (input) {
             input.removeClass('input__text_no-valid')
                 .siblings('.tooltip').fadeOut(time);
         }
     };
 
-    var _validateInput = function(input){
+    var _validateInput = function (input) {
         var type = input.attr('type'),
             tooltipText = input.data('tooltip'),
             tooltipPosition = input.data('tooltip-position'),
@@ -130,16 +132,18 @@ var validateModule = function () {
         if (!input.siblings('.tooltip').length) {
             input.wrap(inputWrapper)
                 .after(tooltipBlock);
+        } else {
+            tooltipBlock = input.siblings('.tooltip');
+        }
 
-            if (tooltipPosition === 'right') {
-                tooltipBlock.css({
-                    right: -tooltipBlock.width() - 17
-                }).addClass('tooltip_right');
-            } else {
-                tooltipBlock.css({
-                    left: -tooltipBlock.width() - 17
-                });
-            }
+        if (tooltipPosition === 'right') {
+            tooltipBlock.css({
+                right: -tooltipBlock.width() - 17
+            }).addClass('tooltip_right');
+        } else {
+            tooltipBlock.css({
+                left: -tooltipBlock.width() - 17
+            });
         }
 
         if (type !== 'file' && !input.hasClass('input__fake-upload')) {
@@ -156,7 +160,7 @@ var validateModule = function () {
 
         if (!input.val()) {
             _validateSwitcher.noValid(input);
-        }else{
+        } else {
             _validateSwitcher.valid(input)
         }
     };
@@ -202,6 +206,3 @@ var validateModule = function () {
 fileLoaderModule().init();
 popupModule().init();
 validateModule().init();
-
-$('input, textarea').placeholder();
-

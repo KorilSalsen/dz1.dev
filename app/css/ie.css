@@ -117,6 +117,7 @@
 
 .input__text {
     background: #fff;
+    line-height: 15px;
 }
 
 .input__button_submit {
@@ -202,5 +203,8 @@
 }
 
 .input__text_no-valid {
-    border-color: #CB6945;
+    border-color: #CB6945 !important;
+}
+.tooltip{
+    z-index: 2;
 }

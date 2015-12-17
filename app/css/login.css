@@ -29,41 +29,43 @@
     margin-bottom: 17px;
 }
 
-.input:before {
+.input__label_login {
     display: block;
-    content: '';
+    padding: 0;
     background-image: url(../img/spritesheet.png);
     background-repeat: no-repeat;
     position: absolute;
     left: 13px;
+    width: 23px;
+    font-size: 0;
     z-index: 1;
 }
 
-.input_login-email:before {
-    width: 23px;
+.input__label_login-email {
     height: 17px;
     top: 13px;
     background-position: -37px -19px;
 }
 
-.input_login-pass:before {
-    width: 22px;
+.input__label_login-pass {
+    width: 23px;
     height: 20px;
-    top: 12px;
+    top: 13px;
     background-position: -2px -27px;
 }
 
-.input:after {
+.input__label_login:after {
     display: block;
     content: '';
     background-image: url(../img/spritesheet.png);
     background-repeat: no-repeat;
     position: absolute;
-    top: 0;
-    left: 42px;
+    top: -13px;
+    left: 29px;
     width: 11px;
-    height: 100%;
+    height: 41px;
     background-position: -694px -5px;
+    z-index: 1;
 }
 
 .input__button_submit-login {
