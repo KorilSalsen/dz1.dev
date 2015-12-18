@@ -43,11 +43,25 @@ var fileLoaderModule = function () {
 var popupModule = function () {
     var popups = $('.popup'),
         popupButtons = $('.popup-button'),
+        serverMessageClose = popups.find('.server-message__close'),
         time = 300;
 
     var _eventListener = function () {
         popupButtons.on('click', _popupSwitcher.show);
         popups.on('click', _popupSwitcher.hide);
+        serverMessageClose.on('click', _hideServerMessage);
+    };
+
+    var _hideServerMessage = function(e){
+        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+
+        var thisClose = $(this);
+
+        thisClose.closest('.server-message')
+            .hide()
+            .end()
+            .closest('.content-block__container_popup')
+            .attr('style', '');
     };
 
     var _popupSwitcher = {
@@ -61,24 +75,33 @@ var popupModule = function () {
         hide: function (e) {
             var $this = $(e.target),
                 thisPopup = $(this),
-                form = thisPopup.find('form');
+                form = thisPopup.find('form'),
+                serverMessageBlock = form.siblings('.server-message'),
+                popupContainer = serverMessageBlock.closest('.content-block__container_popup');
 
-            if ($this.hasClass('popup') || $this.hasClass('popup-close')) {
-                e.preventDefault();
+            if ($this.hasClass('popup') || $this.hasClass('popup__close')) {
+                e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
-                thisPopup.fadeOut(time);
+                thisPopup.fadeOut(time, function(){
+                    serverMessageBlock.attr('style', '')
+                        .removeClass('server-message_ok server-message_error')
+                        .hide()
+                        .siblings()
+                        .show();
+                    popupContainer.attr('style', '');
 
-                if (form.length) {
-                    var inputs = form.find('.input__text'),
-                        tooltips = form.find('.tooltip');
+                    if (form.length) {
+                        var inputs = form.find('.input__text'),
+                            tooltips = form.find('.tooltip');
 
-                    form.each(function (i) {
-                        form.eq(i)[0].reset();
-                    });
+                        form.each(function (i) {
+                            form.eq(i)[0].reset();
+                        });
 
-                    inputs.removeClass('input__text_no-valid');
-                    tooltips.hide();
-                }
+                        inputs.removeClass('input__text_no-valid');
+                        tooltips.hide();
+                    }
+                });
             }
         }
     };
@@ -183,18 +206,52 @@ var validateModule = function () {
     };
 
     var _ajaxAddWork = function (form) {
-        var formData = new FormData(form[0]);
+        if (window.FormData) {
+            var formData = new FormData(form[0]);
 
-        $.ajax({
-            type: "POST",
-            processData: false,
-            contentType: false,
-            url: "php/add-work.php",
-            data: formData
-        })
-            .done(function (data) {
-                console.log(data);
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: "php/add-work.php",
+                data: formData
+            }).done(function (data) {
+                var status = data.status,
+                    serverMessageBlock = form.siblings('.server-message'),
+                    serverMessageTitle = serverMessageBlock.find('.server-message__title'),
+                    serverMessageText = serverMessageBlock.find('.server-message__text'),
+                    serverMessageClose = serverMessageBlock.find('.server-message__close'),
+                    popupContainer = serverMessageBlock.closest('.content-block__container_popup');
+
+                popupContainer.attr('style', '');
+
+                if (status === 'ok') {
+                    serverMessageTitle.text(data.title);
+                    serverMessageText.text(data.message);
+                    serverMessageBlock
+                        .show()
+                        .addClass('server-message_ok')
+                        .siblings()
+                        .not('.popup__close')
+                        .hide();
+                    serverMessageClose.hide();
+                    popupContainer.css({
+                        'top': (window.innerHeight - popupContainer.height()) / 2,
+                        'margin-top': 0
+                    });
+                } else if (status === 'error') {
+                    serverMessageTitle.text(data.title);
+                    serverMessageText.text(data.message);
+                    serverMessageBlock
+                        .show()
+                        .addClass('server-message_error');
+                    serverMessageClose.show();
+                    popupContainer.css({
+                        'top': '-=' + serverMessageBlock.outerHeight(true)
+                    });
+                }
             });
+        }
     };
 
     return {
