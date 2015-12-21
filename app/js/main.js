@@ -49,25 +49,11 @@ function fileLoaderModule() {
 function popupModule() {
     var popups = $('.popup'),
         popupButtons = $('.popup-button'),
-        serverMessageClose = popups.find('.server-message__close'),
         time = 300;
 
     function _eventListener() {
         popupButtons.on('click', _popupSwitcher.show);
         popups.on('click', _popupSwitcher.hide);
-        serverMessageClose.on('click', _hideServerMessage);
-    }
-
-    function _hideServerMessage(e) {
-        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
-
-        var thisClose = $(this);
-
-        thisClose.closest('.server-message')
-            .hide()
-            .end()
-            .closest('.content-block__container_popup')
-            .attr('style', '');
     }
 
     var _popupSwitcher = {
@@ -150,7 +136,7 @@ function validateModule() {
         }
     };
 
-    function _validateInput(input) {
+    function validateInput(input) {
         var type = input.attr('type'),
             tooltipText = input.data('tooltip'),
             tooltipPosition = input.data('tooltip-position'),
@@ -207,15 +193,11 @@ function validateModule() {
         inputs.each(function (i) {
             var input = inputs.eq(i);
 
-            _validateInput(input);
+            validateInput(input);
         });
 
         if (!thisForm.find('.input__text_no-valid').length) {
-            if (thisForm.hasClass('popup-form')) {
-                ajaxModule().addWork(thisForm);
-            } else if (thisForm.hasClass('login-form')) {
-                ajaxModule().login(thisForm);
-            }
+            ajaxModule(thisForm).init();
         }
     }
 
@@ -223,49 +205,93 @@ function validateModule() {
         'init': function () {
             _eventListener();
         },
-        'validateInput': _validateInput
+        'validateInput': validateInput
     };
 }
 
-function ajaxModule() {
-    return {
-        'addWork': function (form) {
-            if (window.FormData) {
-                var formData = new FormData(form[0]),
-                    serverMessageBlock = form.siblings('.server-message'),
-                    serverMessageTitle = serverMessageBlock.find('.server-message__title'),
-                    serverMessageText = serverMessageBlock.find('.server-message__text'),
-                    serverMessageClose = serverMessageBlock.find('.server-message__close'),
-                    popupContainer = serverMessageBlock.closest('.content-block__container_popup');
+function ajaxModule(form) {
+    var serverMessageBlock = form.siblings('.server-message'),
+        serverMessageTitle = serverMessageBlock.find('.server-message__title'),
+        serverMessageText = serverMessageBlock.find('.server-message__text'),
+        serverMessageClose = serverMessageBlock.find('.server-message__close'),
+        container = serverMessageBlock.closest('.content-block__container'),
+        containerHeight = container.outerHeight();
 
-                var messageLoader = {
-                    'ok': function (data) {
-                        serverMessageTitle.text(data.title);
-                        serverMessageText.text(data.message);
-                        serverMessageBlock
-                            .show()
-                            .addClass('server-message_ok')
-                            .siblings()
-                            .not('.popup__close')
-                            .hide();
-                        serverMessageClose.hide();
-                        popupContainer.css({
-                            'top': (window.innerHeight - popupContainer.height()) / 2,
-                            'margin-top': 0
-                        });
-                    },
-                    'error': function (data) {
-                        serverMessageTitle.text(data.title);
-                        serverMessageText.text(data.message);
-                        serverMessageBlock
-                            .show()
-                            .addClass('server-message_error');
-                        serverMessageClose.show();
-                        popupContainer.css({
-                            'top': '-=' + serverMessageBlock.outerHeight(true)
-                        });
-                    }
-                };
+    var _messageLoader = {
+        'ok': function (data) {
+            serverMessageTitle.text(data.title);
+            serverMessageText.text(data.message);
+            serverMessageBlock
+                .show()
+                .addClass('server-message_ok')
+                .siblings()
+                .not('.popup__close')
+                .hide();
+            serverMessageClose.hide();
+            container.css({
+                'margin-top': '+=' + (containerHeight / 2 - container.outerHeight() / 2)
+            });
+        },
+        'error': function (data) {
+            serverMessageTitle.text(data.title);
+            serverMessageText.text(data.message);
+            serverMessageBlock
+                .show()
+                .addClass('server-message_error');
+            serverMessageClose.show();
+            container.css({
+                'top': '-=' + serverMessageBlock.outerHeight(true)
+            });
+        }
+    };
+
+    if (form.hasClass('popup-form')) {
+        _addWork();
+    } else if (form.hasClass('login-form')) {
+        _login();
+    }
+
+    var _serverMessage = {
+        'done': function(data){
+            var status = data.status;
+
+            container.attr('style', '');
+
+            if (status === 'ok') {
+                _messageLoader.ok(data);
+            } else if (status === 'error') {
+                _messageLoader.error(data);
+            }
+        },
+        'error': function(message){
+            var data = {
+                'title': 'Ошибка!',
+                'message': message
+            };
+
+            _messageLoader.error(data);
+        }
+    };
+
+    function _eventListener() {
+        serverMessageClose.on('click', _hideServerMessage);
+    }
+
+    function _hideServerMessage(e) {
+        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+
+        var thisClose = $(this);
+
+        thisClose.closest('.server-message')
+            .hide()
+            .end()
+            .closest('.content-block__container')
+            .attr('style', '');
+    }
+
+    function _addWork() {
+            if (window.FormData) {
+                var formData = new FormData(form[0]);
 
                 $.ajax({
                     type: "POST",
@@ -274,26 +300,14 @@ function ajaxModule() {
                     url: "php/add-work.php",
                     data: formData
                 }).done(function (data) {
-                    var status = data.status;
-
-                    popupContainer.attr('style', '');
-
-                    if (status === 'ok') {
-                        messageLoader.ok(data);
-                    } else if (status === 'error') {
-                        messageLoader.error(data);
-                    }
+                    _serverMessage.done(data);
                 }).error(function () {
-                    var data = {
-                        'title': 'Ошибка!',
-                        'message': 'Невозможно добавить проект.'
-                    };
-
-                    messageLoader.error(data);
+                    _serverMessage.error('Невозможно добавить проект.')
                 });
             }
-        },
-        'login': function (form) {
+        }
+
+    function _login() {
             if (window.FormData) {
                 var formData = new FormData(form[0]);
 
@@ -304,9 +318,22 @@ function ajaxModule() {
                     url: "php/login.php",
                     data: formData
                 }).done(function (data) {
-                    console.log(data.message);
+                    _serverMessage.done(data);
+
+                    if(data.auth){
+                        setTimeout(function(){
+                            window.location.pathname = data.location;
+                        }, 1000);
+                    }
+                }).error(function(){
+                    _serverMessage.error('Невозможно выполнить вход.')
                 });
             }
+        }
+
+    return {
+        'init': function(){
+            _eventListener();
         }
     }
 }
