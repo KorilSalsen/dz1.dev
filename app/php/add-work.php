@@ -14,18 +14,10 @@ $data = array(
 );
 
 foreach ($inputData as $input) {
-    if (gettype($input) == 'array') {
-        if ($input['error']) {
-            $data['status'] = 'error';
-            $data['title'] = 'Ошибка!';
-            $data['message'] = 'Невозможно добавить проект.';
-        }
-    } else {
-        if (!$input) {
-            $data['status'] = 'error';
-            $data['title'] = 'Ошибка!';
-            $data['message'] = 'Невозможно добавить проект.';
-        }
+    if ((gettype($input) == 'array' && $input['error']) || !$input) {
+        $data['status'] = 'error';
+        $data['title'] = 'Ошибка!';
+        $data['message'] = 'Невозможно добавить проект.';
     }
 }
 

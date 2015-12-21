@@ -19,7 +19,10 @@
         <header class="header">
             <div class="header__wrapper">
                 <a href="/" title="LoftSchool. Корченов Илья" class="logo">
-                    <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
+                    <h1 class="logo__title">
+                        LoftSchool. Корченов Илья
+                        <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
+                    </h1>
                 </a>
                 <ul class="social-list cf">
                     <li class="social-list__item facebook"><a href="https://www.facebook.com" class="socials" title="Facebook" target="_blank">Facebook</a></li>
@@ -138,7 +141,7 @@
                     <p class="server-message__text"></p>
                 </div>
                 <!--Форма-->
-                <form action="" class="popup-form">
+                <form action="/" class="popup-form">
                     <!--Название-->
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="name-of-work">Название проекта</label>
@@ -152,7 +155,7 @@
                                 <input class="input__text input__fake-upload" type="text" placeholder="Загрузите изображение" readonly data-tooltip="картинка">
                             </span>
                             <span class="fake-upload-button">Обзор</span>
-                            <input id="pic-of-work" class="input__upload" type="file" name="work-pic" placeholder="Загрузите изображение">
+                            <input id="pic-of-work" class="input__upload" type="file" name="work-pic">
                         </label>
                     </div>
                     <!--Ссылка-->
@@ -163,7 +166,7 @@
                     <!--Описание-->
                     <div class="input input_popup">
                         <label class="input__label input__label_popup" for="description-of-work">Описание</label>
-                        <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup"  name="work-description"placeholder="Пара слов о Вашем проекте" data-tooltip="описание проекта"></textarea>
+                        <textarea id="description-of-work" class="input__text input__text_textarea input__text_textarea-popup input__text_popup"  name="work-description" placeholder="Пара слов о Вашем проекте" data-tooltip="описание проекта"></textarea>
                     </div>
                     <!--Кнопка-->
                     <input type="submit" class="input__button input__button_submit input__button_submit-popup" value="Добавить">
@@ -179,7 +182,9 @@
         </div>
     </footer>
     <script src="bower/jquery/dist/jquery.min.js"></script>
+    <!--[if IE 8]>
     <script src="bower/jquery-placeholder/jquery.placeholder.min.js"></script>
+    <![endif]-->
     <script src="js/main.js"></script>
 </body>
 </html>

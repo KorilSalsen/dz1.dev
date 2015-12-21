@@ -1,15 +1,19 @@
 'use strict';
-$('input, textarea').placeholder();
+function addPlaceholder() {
+    if ($.fn.placeholder) {
+        $('input, textarea').placeholder();
+    }
+}
 
-var fileLoaderModule = function () {
+function fileLoaderModule() {
     var fileUploads = $(".input__upload"),
         picTypes = ['.jpg', '.jpeg', '.png', '.bmp'];
 
-    var _eventListener = function () {
+    function _eventListener() {
         fileUploads.on('change', _fileUploadFix);
-    };
+    }
 
-    var _fileUploadFix = function (e) {
+    function _fileUploadFix(e) {
         var fileApi = ( window.File && window.FileReader && window.FileList && window.Blob ) ? true : false,
             fileName,
             thisUploadWrapper = $(e.target).closest('.input_popup'),
@@ -26,33 +30,35 @@ var fileLoaderModule = function () {
 
         var fileType = fileName.slice(fileName.lastIndexOf('.'));
 
-        if (picTypes.indexOf(fileType) === -1) {
+        if ($.inArray(fileType, picTypes) === -1) {
             fakeFileUploadInput.val('');
             validateModule().validateInput(fakeFileUploadInput);
         } else {
             fakeFileUploadInput.val(fileName);
             validateModule().validateInput(fakeFileUploadInput);
         }
-    };
+    }
 
     return {
-        init: _eventListener
+        'init': function () {
+            _eventListener();
+        }
     };
-};
+}
 
-var popupModule = function () {
+function popupModule() {
     var popups = $('.popup'),
         popupButtons = $('.popup-button'),
         serverMessageClose = popups.find('.server-message__close'),
         time = 300;
 
-    var _eventListener = function () {
+    function _eventListener() {
         popupButtons.on('click', _popupSwitcher.show);
         popups.on('click', _popupSwitcher.hide);
         serverMessageClose.on('click', _hideServerMessage);
-    };
+    }
 
-    var _hideServerMessage = function(e){
+    function _hideServerMessage(e) {
         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
         var thisClose = $(this);
@@ -62,17 +68,19 @@ var popupModule = function () {
             .end()
             .closest('.content-block__container_popup')
             .attr('style', '');
-    };
+    }
 
     var _popupSwitcher = {
-        show: function (e) {
+        'show': function (e) {
             e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
             var popupName = $(this).data('popup-name');
 
-            popups.filter('[data-popup-name="' + popupName + '"]').fadeIn(time);
+            popups.filter('[data-popup-name="' + popupName + '"]').fadeIn(time, function () {
+                addPlaceholder();
+            });
         },
-        hide: function (e) {
+        'hide': function (e) {
             var $this = $(e.target),
                 thisPopup = $(this),
                 form = thisPopup.find('form'),
@@ -82,7 +90,7 @@ var popupModule = function () {
             if ($this.hasClass('popup') || $this.hasClass('popup__close')) {
                 e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
-                thisPopup.fadeOut(time, function(){
+                thisPopup.fadeOut(time, function () {
                     serverMessageBlock.attr('style', '')
                         .removeClass('server-message_ok server-message_error')
                         .hide()
@@ -107,28 +115,29 @@ var popupModule = function () {
     };
 
     return {
-        init: _eventListener
+        'init': function () {
+            _eventListener();
+        }
     };
-};
+}
 
-var validateModule = function () {
+function validateModule() {
     var forms = $('form'),
-        resetButtons = $('[type="reset"]'),
         time = 300;
 
-    var _eventListener = function () {
+    function _eventListener() {
         forms.on('submit', _validator);
-        resetButtons.on('click', _cleanForm);
-    };
+        forms.on('reset', _cleanForm);
+    }
 
-    var _cleanForm = function (e) {
+    function _cleanForm(e) {
         var thisForm = $(e.target).closest('form'),
             inputs = thisForm.find('.input__text'),
             tooltips = thisForm.find('.tooltip');
 
         inputs.removeClass('input__text_no-valid');
         tooltips.hide();
-    };
+    }
 
     var _validateSwitcher = {
         noValid: function (input) {
@@ -141,7 +150,7 @@ var validateModule = function () {
         }
     };
 
-    var _validateInput = function (input) {
+    function _validateInput(input) {
         var type = input.attr('type'),
             tooltipText = input.data('tooltip'),
             tooltipPosition = input.data('tooltip-position'),
@@ -149,8 +158,9 @@ var validateModule = function () {
                 'class': 'input-tooltip-wrapper'
             }),
             tooltipBlock = $('<div></div>', {
-                'class': 'tooltip'
-            }).text(tooltipText);
+                'class': 'tooltip',
+                'text': tooltipText
+            });
 
         if (!input.siblings('.tooltip').length) {
             input.wrap(inputWrapper)
@@ -186,9 +196,9 @@ var validateModule = function () {
         } else {
             _validateSwitcher.valid(input)
         }
-    };
+    }
 
-    var _validator = function (e) {
+    function _validator(e) {
         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
         var thisForm = $(this),
@@ -201,65 +211,107 @@ var validateModule = function () {
         });
 
         if (!thisForm.find('.input__text_no-valid').length) {
-            _ajaxAddWork(thisForm);
+            if (thisForm.hasClass('popup-form')) {
+                ajaxModule().addWork(thisForm);
+            } else if (thisForm.hasClass('login-form')) {
+                ajaxModule().login(thisForm);
+            }
         }
+    }
+
+    return {
+        'init': function () {
+            _eventListener();
+        },
+        'validateInput': _validateInput
     };
+}
 
-    var _ajaxAddWork = function (form) {
-        if (window.FormData) {
-            var formData = new FormData(form[0]);
-
-            $.ajax({
-                type: "POST",
-                processData: false,
-                contentType: false,
-                url: "php/add-work.php",
-                data: formData
-            }).done(function (data) {
-                var status = data.status,
+function ajaxModule() {
+    return {
+        'addWork': function (form) {
+            if (window.FormData) {
+                var formData = new FormData(form[0]),
                     serverMessageBlock = form.siblings('.server-message'),
                     serverMessageTitle = serverMessageBlock.find('.server-message__title'),
                     serverMessageText = serverMessageBlock.find('.server-message__text'),
                     serverMessageClose = serverMessageBlock.find('.server-message__close'),
                     popupContainer = serverMessageBlock.closest('.content-block__container_popup');
 
-                popupContainer.attr('style', '');
+                var messageLoader = {
+                    'ok': function (data) {
+                        serverMessageTitle.text(data.title);
+                        serverMessageText.text(data.message);
+                        serverMessageBlock
+                            .show()
+                            .addClass('server-message_ok')
+                            .siblings()
+                            .not('.popup__close')
+                            .hide();
+                        serverMessageClose.hide();
+                        popupContainer.css({
+                            'top': (window.innerHeight - popupContainer.height()) / 2,
+                            'margin-top': 0
+                        });
+                    },
+                    'error': function (data) {
+                        serverMessageTitle.text(data.title);
+                        serverMessageText.text(data.message);
+                        serverMessageBlock
+                            .show()
+                            .addClass('server-message_error');
+                        serverMessageClose.show();
+                        popupContainer.css({
+                            'top': '-=' + serverMessageBlock.outerHeight(true)
+                        });
+                    }
+                };
 
-                if (status === 'ok') {
-                    serverMessageTitle.text(data.title);
-                    serverMessageText.text(data.message);
-                    serverMessageBlock
-                        .show()
-                        .addClass('server-message_ok')
-                        .siblings()
-                        .not('.popup__close')
-                        .hide();
-                    serverMessageClose.hide();
-                    popupContainer.css({
-                        'top': (window.innerHeight - popupContainer.height()) / 2,
-                        'margin-top': 0
-                    });
-                } else if (status === 'error') {
-                    serverMessageTitle.text(data.title);
-                    serverMessageText.text(data.message);
-                    serverMessageBlock
-                        .show()
-                        .addClass('server-message_error');
-                    serverMessageClose.show();
-                    popupContainer.css({
-                        'top': '-=' + serverMessageBlock.outerHeight(true)
-                    });
-                }
-            });
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    url: "php/add-work.php",
+                    data: formData
+                }).done(function (data) {
+                    var status = data.status;
+
+                    popupContainer.attr('style', '');
+
+                    if (status === 'ok') {
+                        messageLoader.ok(data);
+                    } else if (status === 'error') {
+                        messageLoader.error(data);
+                    }
+                }).error(function () {
+                    var data = {
+                        'title': 'Ошибка!',
+                        'message': 'Невозможно добавить проект.'
+                    };
+
+                    messageLoader.error(data);
+                });
+            }
+        },
+        'login': function (form) {
+            if (window.FormData) {
+                var formData = new FormData(form[0]);
+
+                $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    url: "php/login.php",
+                    data: formData
+                }).done(function (data) {
+                    console.log(data.message);
+                });
+            }
         }
-    };
+    }
+}
 
-    return {
-        init: _eventListener,
-        validateInput: _validateInput
-    };
-};
-
+addPlaceholder();
 fileLoaderModule().init();
 popupModule().init();
 validateModule().init();
