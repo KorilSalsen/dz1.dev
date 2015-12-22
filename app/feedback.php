@@ -1,3 +1,7 @@
+<?php
+session_start(session_name('admin'));
+include_once "php/funtions.php";
+?>
 <!doctype html>
 <html lang="ru-RU">
 <head>
@@ -38,8 +42,8 @@
                 <nav class="menu">
                     <!-- Меню-->
                     <ul class="menu-list">
-                        <li class="menu-list__item"><a class="buttons" href="index.html" title="Обо мне">Обо мне</a></li>
-                        <li class="menu-list__item"><a class="buttons" href="works.html" title="Мои Работы">Мои Работы</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="index.php" title="Обо мне">Обо мне</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="works.php" title="Мои Работы">Мои Работы</a></li>
                         <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Обратная связь">Обратная связь</a></li>
                     </ul>
                     <!-- Контакты-->
@@ -80,9 +84,8 @@
                             </div>
                             <!--Капча-->
                             <div class="input input_captcha">
-                                <label for="captcha" class="input__label">Введите код, указанный на картинке</label>
-                                <img src="img/captcha.jpg" alt="captcha" class="input__captcha-img">
-                                <input id="captcha" class="input__text input__text_captcha" type="text" name="feedback-captcha" placeholder="Введите код" data-tooltip="код капчи" data-tooltip-position="right">
+                                <div class="input__label">Подтвердите, что вы не робот</div>
+                                <div class="g-recaptcha input__text" data-sitekey="6LcOphMTAAAAAI9S0CCJVJPlNYKWm8t9LQ6ySJ9H" data-tooltip="пройдите проверку" data-callback="recaptchaCallback"></div>
                             </div>
                             <!--Кнопки-->
                             <div class="input input_buttons cf">
@@ -90,6 +93,11 @@
                                 <input type="reset" class="input__button input__button_reset" value="Сбросить">
                             </div>
                         </form>
+                        <div class="server-message">
+                            <a href="" class="server-message__close" title="Close">Close</a>
+                            <p class="server-message__title"></p>
+                            <p class="server-message__text"></p>
+                        </div>
                     </div>
                 </article>
             </section>
@@ -98,11 +106,12 @@
     <!--Футер-->
     <footer class="footer">
         <div class="copyright">
-            <a href="login.html" class="enter">вход</a>
+            <?php print_login_button() ?>
             <span class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</span>
         </div>
     </footer>
     <script src="bower/jquery/dist/jquery.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <!--[if IE 8]>
     <script src="bower/jquery-placeholder/jquery.placeholder.min.js"></script>
     <![endif]-->

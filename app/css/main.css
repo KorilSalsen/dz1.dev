@@ -380,7 +380,8 @@ ul {
   position: relative;
 }
 
-.enter {
+.enter,
+.exit {
   display: block;
   text-decoration: none;
   padding-left: 28px;
@@ -411,7 +412,28 @@ ul {
   background-position: -558px -5px;
 }
 
-.enter:active {
+.exit:before {
+  display: block;
+  content: '';
+  background-image: url("../img/spritesheet.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 24px;
+  height: 22px;
+  background-position: -558px -5px;
+  left: 0;
+  top: 50%;
+  margin-top: -11px;
+}
+
+.exit:hover:before {
+  width: 19px;
+  height: 22px;
+  background-position: -336px -5px;
+}
+
+.enter:active,
+.exit:active {
   top: 2px;
 }
 .header {

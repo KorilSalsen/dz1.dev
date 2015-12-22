@@ -19,9 +19,9 @@ if (empty($email) || empty($password)) {
         $uri = dirname(dirname($_SERVER['PHP_SELF']));
         $_SESSION['status'] = "ok";
         $_SESSION['title'] = "Ура!";
-        $_SESSION['message'] = "Вы успешно залогинены";
+        $_SESSION['message'] = "Вы успешно вошли";
         $_SESSION['auth'] = true;
-        $_SESSION['location'] = $uri.'/index.html';
+        $_SESSION['location'] = $uri.'/index.php';
     } else {
         $_SESSION['status'] = "error";
         $_SESSION['title'] = "Ошибка!";

@@ -119,10 +119,13 @@ function validateModule() {
     function _cleanForm(e) {
         var thisForm = $(e.target).closest('form'),
             inputs = thisForm.find('.input__text'),
-            tooltips = thisForm.find('.tooltip');
+            tooltips = thisForm.find('.tooltip'),
+            serverMessage = thisForm.siblings('.server-message');
 
         inputs.removeClass('input__text_no-valid');
         tooltips.hide();
+        serverMessage.hide();
+        grecaptcha.reset();
     }
 
     var _validateSwitcher = {
@@ -165,7 +168,7 @@ function validateModule() {
             });
         }
 
-        if (type !== 'file' && !input.hasClass('input__fake-upload')) {
+        if (type !== 'file' && !input.hasClass('input__fake-upload') && !input.hasClass('g-recaptcha')) {
             input.on('focus', function (e) {
                 var thisInput = $(e.target);
 
@@ -177,10 +180,18 @@ function validateModule() {
             });
         }
 
-        if (!input.val()) {
-            _validateSwitcher.noValid(input);
+        if (input.hasClass('g-recaptcha')) {
+            if (!grecaptcha.getResponse().length) {
+                _validateSwitcher.noValid(input);
+            } else {
+                _validateSwitcher.valid(input)
+            }
         } else {
-            _validateSwitcher.valid(input)
+            if (!input.val()) {
+                _validateSwitcher.noValid(input);
+            } else {
+                _validateSwitcher.valid(input)
+            }
         }
     }
 
@@ -218,30 +229,49 @@ function ajaxModule(form) {
         containerHeight = container.outerHeight();
 
     var _messageLoader = {
-        'ok': function (data) {
+        'ok': function (data, className, noHideOver, noMoveParent) {
             serverMessageTitle.text(data.title);
             serverMessageText.text(data.message);
             serverMessageBlock
                 .show()
-                .addClass('server-message_ok')
-                .siblings()
-                .not('.popup__close')
-                .hide();
+                .addClass('server-message_ok');
+
+            if (className) {
+                serverMessageBlock.addClass(className);
+            }
+
+            if (!noHideOver) {
+                serverMessageBlock
+                    .siblings()
+                    .not('.popup__close')
+                    .hide();
+            }
+
             serverMessageClose.hide();
-            container.css({
-                'margin-top': '+=' + (containerHeight / 2 - container.outerHeight() / 2)
-            });
+
+            if (!noMoveParent) {
+                container.css({
+                    'margin-top': '+=' + (containerHeight / 2 - container.outerHeight() / 2)
+                });
+            }
         },
-        'error': function (data) {
+        'error': function (data, className, noMoveParent) {
             serverMessageTitle.text(data.title);
             serverMessageText.text(data.message);
             serverMessageBlock
                 .show()
                 .addClass('server-message_error');
+
+            if (className) {
+                serverMessageBlock.addClass(className);
+            }
+
             serverMessageClose.show();
-            container.css({
-                'top': '-=' + serverMessageBlock.outerHeight(true)
-            });
+            if (!noMoveParent) {
+                container.css({
+                    'top': '-=' + serverMessageBlock.outerHeight(true)
+                });
+            }
         }
     };
 
@@ -249,27 +279,29 @@ function ajaxModule(form) {
         _addWork();
     } else if (form.hasClass('login-form')) {
         _login();
+    } else if (form.hasClass('feedback-form')) {
+        _sendMail();
     }
 
     var _serverMessage = {
-        'done': function(data){
+        'done': function (data, className, noHideOver, noMoveParent) {
             var status = data.status;
 
             container.attr('style', '');
 
             if (status === 'ok') {
-                _messageLoader.ok(data);
+                _messageLoader.ok(data, className, noHideOver, noMoveParent);
             } else if (status === 'error') {
-                _messageLoader.error(data);
+                _messageLoader.error(data, className, noHideOver, noMoveParent);
             }
         },
-        'error': function(message){
+        'error': function (message, className, noMoveParent) {
             var data = {
                 'title': 'Ошибка!',
                 'message': message
             };
 
-            _messageLoader.error(data);
+            _messageLoader.error(data, className, noMoveParent);
         }
     };
 
@@ -290,49 +322,74 @@ function ajaxModule(form) {
     }
 
     function _addWork() {
-            if (window.FormData) {
-                var formData = new FormData(form[0]);
+        if (window.FormData) {
+            var formData = new FormData(form[0]);
 
-                $.ajax({
-                    type: "POST",
-                    processData: false,
-                    contentType: false,
-                    url: "php/add-work.php",
-                    data: formData
-                }).done(function (data) {
-                    _serverMessage.done(data);
-                }).error(function () {
-                    _serverMessage.error('Невозможно добавить проект.')
-                });
-            }
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: "php/add-work.php",
+                data: formData
+            }).done(function (data) {
+                _serverMessage.done(data);
+
+                var project = $(data.project),
+                    addButton = $('.work__add-link').closest('.work');
+
+                project.insertBefore(addButton);
+                $('<span> </span>').insertBefore(addButton);
+            }).error(function () {
+                _serverMessage.error('Невозможно добавить проект.')
+            });
         }
+    }
 
     function _login() {
-            if (window.FormData) {
-                var formData = new FormData(form[0]);
+        if (window.FormData) {
+            var formData = new FormData(form[0]);
 
-                $.ajax({
-                    type: "POST",
-                    processData: false,
-                    contentType: false,
-                    url: "php/login.php",
-                    data: formData
-                }).done(function (data) {
-                    _serverMessage.done(data);
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: "php/login.php",
+                data: formData
+            }).done(function (data) {
+                _serverMessage.done(data);
 
-                    if(data.auth){
-                        setTimeout(function(){
-                            window.location.pathname = data.location;
-                        }, 1000);
-                    }
-                }).error(function(){
-                    _serverMessage.error('Невозможно выполнить вход.')
-                });
-            }
+                if (data.auth) {
+                    setTimeout(function () {
+                        window.location.pathname = data.location;
+                    }, 1000);
+                }
+            }).error(function () {
+                _serverMessage.error('Невозможно выполнить вход.')
+            });
         }
+    }
+
+    function _sendMail() {
+
+        if (window.FormData) {
+            var formData = new FormData(form[0]);
+
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: "php/send.php",
+                data: formData
+            }).done(function (data) {
+                _serverMessage.done(data, 'server-message_feedback', true, true);
+            }).error(function () {
+                _serverMessage.error('Невозможно отправить сообщение.', 'server-message_feedback', true)
+            });
+        }
+    }
 
     return {
-        'init': function(){
+        'init': function () {
             _eventListener();
         }
     }
@@ -342,3 +399,7 @@ addPlaceholder();
 fileLoaderModule().init();
 popupModule().init();
 validateModule().init();
+function recaptchaCallback(){
+    console.log('recaptcha');
+    validateModule().validateInput($('.g-recaptcha'));
+}

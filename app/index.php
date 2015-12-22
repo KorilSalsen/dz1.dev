@@ -1,3 +1,7 @@
+<?php
+session_start(session_name('admin'));
+include_once "php/funtions.php";
+?>
 <!doctype html>
 <html lang="ru-RU">
 <head>
@@ -37,8 +41,8 @@
                 <nav class="menu">
                     <ul class="menu-list">
                         <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Обо мне">Обо мне</a></li>
-                        <li class="menu-list__item"><a class="buttons" href="works.html" title="Мои Работы">Мои Работы</a></li>
-                        <li class="menu-list__item"><a class="buttons" href="feedback.html" title="Обратная связь">Обратная связь</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="works.php" title="Мои Работы">Мои Работы</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
                     </ul>
                     <!-- Контакты-->
                     <div class="contacts-wrapper">
@@ -138,7 +142,7 @@
     </div>
     <footer class="footer">
         <div class="copyright">
-            <a href="login.html" class="enter">вход</a>
+            <?php print_login_button() ?>
             <span class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</span>
         </div>
     </footer>

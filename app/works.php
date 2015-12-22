@@ -1,3 +1,7 @@
+<?php
+session_start(session_name('admin'));
+include_once "php/funtions.php";
+?>
 <!doctype html>
 <html lang="ru-RU">
 <head>
@@ -38,9 +42,9 @@
                 <!-- Меню-->
                 <nav class="menu">
                     <ul class="menu-list">
-                        <li class="menu-list__item"><a class="buttons" href="index.html" title="Обо мне">Обо мне</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="index.php" title="Обо мне">Обо мне</a></li>
                         <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Мои Работы">Мои Работы</a></li>
-                        <li class="menu-list__item"><a class="buttons" href="feedback.html" title="Обратная связь">Обратная связь</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
                     </ul>
                     <!-- Контакты-->
                     <div class="contacts-wrapper">
@@ -59,72 +63,7 @@
                     <h3 class="content-block__tittle">Мои работы</h3>
                     <div class="content-block__container cf">
                         <ul class="works-list">
-                            <li class="work">
-                                <div class="work__img-wrapper">
-                                    <div class="link-wrapper">
-                                        <a href="http://a-industry.ru" class="img-link" title="a-industry.ru">Подробнее</a>
-                                    </div>
-                                    <img class="work__img" src="img/site1.jpg" alt="a-industry.ru">
-                                </div>
-                                <a href="http://a-industry.ru" class="work__link" title="a-industry.ru">a-industry.ru</a>
-                                <p class="work__description">
-                                    Корпоративный и в тоже время продающий сайт строительной компании a-industry.
-                                </p>
-                            </li>
-                            <li class="work">
-                                <div class="work__img-wrapper">
-                                    <div class="link-wrapper">
-                                        <a href="http://домгазобетон.рф" class="img-link" title="домгазобетон.рф">Подробнее</a>
-                                    </div>
-                                    <img class="work__img" src="img/site2.jpg" alt="домгазобетон.рф">
-                                </div>
-                                <a href="http://домгазобетон.рф" class="work__link" title="домгазобетон.рф">домгазобетон.рф</a>
-                                <p class="work__description">
-                                    Продающая страница для компании ledenland.
-                                </p>
-                            </li>
-                            <li class="work">
-                                <div class="work__img-wrapper">
-                                    <div class="link-wrapper">
-                                        <a href="http://crmconsulting.biz" class="img-link" title="crmconsulting.biz">Подробнее</a>
-                                    </div>
-                                    <img class="work__img" src="img/site3.jpg" alt="crmconsulting.biz">
-                                </div>
-                                <a href="http://crmconsulting.biz" class="work__link" title="crmconsulting.biz">crmconsulting.biz</a>
-                                <p class="work__description">
-                                    Лендинг компании «СRM Consulting» специализирующейся на точной настройке Битрикс24 под бизнес.
-                                </p>
-                            </li>
-                            <li class="work">
-                                <div class="work__img-wrapper">
-                                    <div class="link-wrapper">
-                                        <a href="http://landingsloft.ru" class="img-link" title="landingsloft.ru">Подробнее</a>
-                                    </div>
-                                    <img class="work__img" src="img/site4.jpg" alt="landingsloft.ru">
-                                </div>
-                                <a href="http://landingsloft.ru" class="work__link" title="landingsloft.ru">landingsloft.ru</a>
-                                <p class="work__description">
-                                    Сайт по услугам разработки продающих лендингов.
-                                </p>
-                            </li>
-                            <li class="work">
-                                <div class="work__img-wrapper">
-                                    <div class="link-wrapper">
-                                        <a href="http://yasnow.biz" class="img-link" title="yasnow.biz">Подробнее</a>
-                                    </div>
-                                    <img class="work__img" src="img/site5.jpg" alt="yasnow.biz">
-                                </div>
-                                <a href="http://yasnow.biz" class="work__link" title="yasnow.biz">yasnow.biz</a>
-                                <p class="work__description">
-                                    Landing page по продажи франшизы снежного бизнеса.
-                                </p>
-                            </li>
-                            <!--Добавление работы-->
-                            <li class="work work_add">
-                                <a href="" class="work__add-link work__add-link_ico popup-button" data-popup-name="new-project" title="Добавить проект">
-                                    <p class="work__add-text">Добавить проект</p>
-                                </a>
-                            </li>
+                            <?php print_projects() ?>
                         </ul>
                     </div>
                 </article>
@@ -177,7 +116,7 @@
     <!--Футер-->
     <footer class="footer">
         <div class="copyright">
-            <a href="login.html" class="enter">вход</a>
+            <?php print_login_button() ?>
             <span class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</span>
         </div>
     </footer>
