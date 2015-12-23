@@ -16,7 +16,7 @@ if (empty($email) || empty($password)) {
     $result_array = mysql_fetch_assoc($result);
 
     if ($result_array['ID']) {
-        $uri = dirname(dirname($_SERVER['PHP_SELF']));
+        $uri = trim(dirname(dirname($_SERVER['PHP_SELF'])), '\\');
         $_SESSION['status'] = "ok";
         $_SESSION['title'] = "Ура!";
         $_SESSION['message'] = "Вы успешно вошли";

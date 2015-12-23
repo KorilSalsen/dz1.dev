@@ -84,7 +84,7 @@ include_once "php/funtions.php";
                             </div>
                             <!--Капча-->
                             <div class="input input_captcha">
-                                <div class="input__label">Подтвердите, что вы не робот</div>
+                                <div class="input__label input__label_captcha">Подтвердите, что вы не робот</div>
                                 <div class="g-recaptcha input__text" data-sitekey="6LcOphMTAAAAAI9S0CCJVJPlNYKWm8t9LQ6ySJ9H" data-tooltip="пройдите проверку" data-callback="recaptchaCallback"></div>
                             </div>
                             <!--Кнопки-->

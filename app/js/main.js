@@ -234,6 +234,7 @@ function ajaxModule(form) {
             serverMessageText.text(data.message);
             serverMessageBlock
                 .show()
+                .removeClass('server-message_error')
                 .addClass('server-message_ok');
 
             if (className) {
@@ -260,6 +261,7 @@ function ajaxModule(form) {
             serverMessageText.text(data.message);
             serverMessageBlock
                 .show()
+                .removeClass('server-message_ok')
                 .addClass('server-message_error');
 
             if (className) {
@@ -400,6 +402,5 @@ fileLoaderModule().init();
 popupModule().init();
 validateModule().init();
 function recaptchaCallback(){
-    console.log('recaptcha');
     validateModule().validateInput($('.g-recaptcha'));
 }
