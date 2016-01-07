@@ -1,0 +1,51 @@
+@media screen and (max-width: 768px) {
+    html, body {
+        min-width: 768px;
+    }
+
+    .header__wrapper {
+        max-width: 688px;
+    }
+
+    .social-list {
+        right: 56px;
+    }
+
+    .open-menu {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .page {
+        width: 642px;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .contacts-list_bottom {
+        display: block;
+        margin-bottom: 41px;
+    }
+
+    .contacts-list_bottom .contacts-list__item {
+        float: left;
+    }
+
+    .contacts-list_bottom .buttons {
+        box-sizing: border-box;
+        width: 214px;
+        padding-left: 79px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .work{
+        margin-left: 75px;
+        width: 194px;
+    }
+}

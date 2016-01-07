@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="bower/normalize-css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/media.css">
     <!--[if IE 8]>
         <script src="bower/html5shiv/dist/html5shiv.min.js"></script>
         <link rel="stylesheet" href="css/ie.css">
@@ -17,6 +18,11 @@
     <div class="page-wrapper">
         <div class="content-block__container content-block__container_login">
             <p class="form-title">Авторизируйтесь</p>
+            <div class="server-message">
+                <a href="" class="server-message__close" title="Close">Close</a>
+                <p class="server-message__title"></p>
+                <p class="server-message__text"></p>
+            </div>
             <form action="/" class="login-form">
                 <div class="input input_login-email">
                     <label for="login-email" class="input__label input__label_login input__label_login-email">Email</label>

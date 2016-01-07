@@ -49,25 +49,11 @@ function fileLoaderModule() {
 function popupModule() {
     var popups = $('.popup'),
         popupButtons = $('.popup-button'),
-        serverMessageClose = popups.find('.server-message__close'),
         time = 300;
 
     function _eventListener() {
         popupButtons.on('click', _popupSwitcher.show);
         popups.on('click', _popupSwitcher.hide);
-        serverMessageClose.on('click', _hideServerMessage);
-    }
-
-    function _hideServerMessage(e) {
-        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
-
-        var thisClose = $(this);
-
-        thisClose.closest('.server-message')
-            .hide()
-            .end()
-            .closest('.content-block__container_popup')
-            .attr('style', '');
     }
 
     var _popupSwitcher = {
@@ -133,10 +119,13 @@ function validateModule() {
     function _cleanForm(e) {
         var thisForm = $(e.target).closest('form'),
             inputs = thisForm.find('.input__text'),
-            tooltips = thisForm.find('.tooltip');
+            tooltips = thisForm.find('.tooltip'),
+            serverMessage = thisForm.siblings('.server-message');
 
         inputs.removeClass('input__text_no-valid');
         tooltips.hide();
+        serverMessage.hide();
+        grecaptcha.reset();
     }
 
     var _validateSwitcher = {
@@ -150,7 +139,7 @@ function validateModule() {
         }
     };
 
-    function _validateInput(input) {
+    function validateInput(input) {
         var type = input.attr('type'),
             tooltipText = input.data('tooltip'),
             tooltipPosition = input.data('tooltip-position'),
@@ -179,7 +168,7 @@ function validateModule() {
             });
         }
 
-        if (type !== 'file' && !input.hasClass('input__fake-upload')) {
+        if (type !== 'file' && !input.hasClass('input__fake-upload') && !input.hasClass('g-recaptcha')) {
             input.on('focus', function (e) {
                 var thisInput = $(e.target);
 
@@ -191,10 +180,18 @@ function validateModule() {
             });
         }
 
-        if (!input.val()) {
-            _validateSwitcher.noValid(input);
+        if (input.hasClass('g-recaptcha')) {
+            if (!grecaptcha.getResponse().length) {
+                _validateSwitcher.noValid(input);
+            } else {
+                _validateSwitcher.valid(input)
+            }
         } else {
-            _validateSwitcher.valid(input)
+            if (!input.val()) {
+                _validateSwitcher.noValid(input);
+            } else {
+                _validateSwitcher.valid(input)
+            }
         }
     }
 
@@ -207,15 +204,11 @@ function validateModule() {
         inputs.each(function (i) {
             var input = inputs.eq(i);
 
-            _validateInput(input);
+            validateInput(input);
         });
 
         if (!thisForm.find('.input__text_no-valid').length) {
-            if (thisForm.hasClass('popup-form')) {
-                ajaxModule().addWork(thisForm);
-            } else if (thisForm.hasClass('login-form')) {
-                ajaxModule().login(thisForm);
-            }
+            ajaxModule(thisForm).init();
         }
     }
 
@@ -223,95 +216,212 @@ function validateModule() {
         'init': function () {
             _eventListener();
         },
-        'validateInput': _validateInput
+        'validateInput': validateInput
     };
 }
 
-function ajaxModule() {
-    return {
-        'addWork': function (form) {
-            if (window.FormData) {
-                var formData = new FormData(form[0]),
-                    serverMessageBlock = form.siblings('.server-message'),
-                    serverMessageTitle = serverMessageBlock.find('.server-message__title'),
-                    serverMessageText = serverMessageBlock.find('.server-message__text'),
-                    serverMessageClose = serverMessageBlock.find('.server-message__close'),
-                    popupContainer = serverMessageBlock.closest('.content-block__container_popup');
+function ajaxModule(form) {
+    var serverMessageBlock = form.siblings('.server-message'),
+        serverMessageTitle = serverMessageBlock.find('.server-message__title'),
+        serverMessageText = serverMessageBlock.find('.server-message__text'),
+        serverMessageClose = serverMessageBlock.find('.server-message__close'),
+        container = serverMessageBlock.closest('.content-block__container'),
+        containerHeight = container.outerHeight();
 
-                var messageLoader = {
-                    'ok': function (data) {
-                        serverMessageTitle.text(data.title);
-                        serverMessageText.text(data.message);
-                        serverMessageBlock
-                            .show()
-                            .addClass('server-message_ok')
-                            .siblings()
-                            .not('.popup__close')
-                            .hide();
-                        serverMessageClose.hide();
-                        popupContainer.css({
-                            'top': (window.innerHeight - popupContainer.height()) / 2,
-                            'margin-top': 0
-                        });
-                    },
-                    'error': function (data) {
-                        serverMessageTitle.text(data.title);
-                        serverMessageText.text(data.message);
-                        serverMessageBlock
-                            .show()
-                            .addClass('server-message_error');
-                        serverMessageClose.show();
-                        popupContainer.css({
-                            'top': '-=' + serverMessageBlock.outerHeight(true)
-                        });
-                    }
-                };
+    var _messageLoader = {
+        'ok': function (data, className, noHideOver, noMoveParent) {
+            serverMessageTitle.text(data.title);
+            serverMessageText.text(data.message);
+            serverMessageBlock
+                .show()
+                .removeClass('server-message_error')
+                .addClass('server-message_ok');
 
-                $.ajax({
-                    type: "POST",
-                    processData: false,
-                    contentType: false,
-                    url: "php/add-work.php",
-                    data: formData
-                }).done(function (data) {
-                    var status = data.status;
+            if (className) {
+                serverMessageBlock.addClass(className);
+            }
 
-                    popupContainer.attr('style', '');
+            if (!noHideOver) {
+                serverMessageBlock
+                    .siblings()
+                    .not('.popup__close')
+                    .hide();
+            }
 
-                    if (status === 'ok') {
-                        messageLoader.ok(data);
-                    } else if (status === 'error') {
-                        messageLoader.error(data);
-                    }
-                }).error(function () {
-                    var data = {
-                        'title': 'Ошибка!',
-                        'message': 'Невозможно добавить проект.'
-                    };
+            serverMessageClose.hide();
 
-                    messageLoader.error(data);
+            if (!noMoveParent) {
+                container.css({
+                    'margin-top': '+=' + (containerHeight / 2 - container.outerHeight() / 2)
                 });
             }
         },
-        'login': function (form) {
-            if (window.FormData) {
-                var formData = new FormData(form[0]);
+        'error': function (data, className, noMoveParent) {
+            serverMessageTitle.text(data.title);
+            serverMessageText.text(data.message);
+            serverMessageBlock
+                .show()
+                .removeClass('server-message_ok')
+                .addClass('server-message_error');
 
-                $.ajax({
-                    type: "POST",
-                    processData: false,
-                    contentType: false,
-                    url: "php/login.php",
-                    data: formData
-                }).done(function (data) {
-                    console.log(data.message);
+            if (className) {
+                serverMessageBlock.addClass(className);
+            }
+
+            serverMessageClose.show();
+            if (!noMoveParent) {
+                container.css({
+                    'top': '-=' + serverMessageBlock.outerHeight(true)
                 });
             }
         }
+    };
+
+    if (form.hasClass('popup-form')) {
+        _addWork();
+    } else if (form.hasClass('login-form')) {
+        _login();
+    } else if (form.hasClass('feedback-form')) {
+        _sendMail();
     }
+
+    var _serverMessage = {
+        'done': function (data, className, noHideOver, noMoveParent) {
+            var status = data.status;
+
+            container.attr('style', '');
+
+            if (status === 'ok') {
+                _messageLoader.ok(data, className, noHideOver, noMoveParent);
+            } else if (status === 'error') {
+                _messageLoader.error(data, className, noHideOver, noMoveParent);
+            }
+        },
+        'error': function (message, className, noMoveParent) {
+            var data = {
+                'title': 'Ошибка!',
+                'message': message
+            };
+
+            _messageLoader.error(data, className, noMoveParent);
+        }
+    };
+
+    function _eventListener() {
+        serverMessageClose.on('click', _hideServerMessage);
+    }
+
+    function _hideServerMessage(e) {
+        e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+
+        var thisClose = $(this);
+
+        thisClose.closest('.server-message')
+            .hide()
+            .end()
+            .closest('.content-block__container')
+            .attr('style', '');
+    }
+
+    function _addWork() {
+        if (window.FormData) {
+            var formData = new FormData(form[0]);
+
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: "php/add-work.php",
+                data: formData
+            }).done(function (data) {
+                _serverMessage.done(data);
+
+                var project = $(data.project),
+                    addButton = $('.work__add-link').closest('.work');
+
+                project.insertBefore(addButton);
+                $('<span> </span>').insertBefore(addButton);
+            }).error(function () {
+                _serverMessage.error('Невозможно добавить проект.')
+            });
+        }
+    }
+
+    function _login() {
+        if (window.FormData) {
+            var formData = new FormData(form[0]);
+
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: "php/login.php",
+                data: formData
+            }).done(function (data) {
+                _serverMessage.done(data);
+
+                if (data.auth) {
+                    setTimeout(function () {
+                        window.location.pathname = data.location;
+                    }, 1000);
+                }
+            }).error(function () {
+                _serverMessage.error('Невозможно выполнить вход.')
+            });
+        }
+    }
+
+    function _sendMail() {
+
+        if (window.FormData) {
+            var formData = new FormData(form[0]);
+
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: "php/send.php",
+                data: formData
+            }).done(function (data) {
+                _serverMessage.done(data, 'server-message_feedback', true, true);
+            }).error(function () {
+                _serverMessage.error('Невозможно отправить сообщение.', 'server-message_feedback', true)
+            });
+        }
+    }
+
+    return {
+        'init': function () {
+            _eventListener();
+        }
+    }
+}
+
+function showMenu(){
+    var button = $('.open-menu'),
+        menu = $('.menu-list_header');
+
+    function _eventListener(){
+        button.on('click',function(e){
+            e.preventDefault();
+
+            menu.slideToggle(0);
+        });
+    }
+
+    return {
+        init: function () {
+            _eventListener()
+        }
+    };
 }
 
 addPlaceholder();
 fileLoaderModule().init();
 popupModule().init();
 validateModule().init();
+showMenu().init();
+
+function recaptchaCallback(){
+    validateModule().validateInput($('.g-recaptcha'));
+}

@@ -6,3 +6,15 @@
     width: 403px;
     margin: auto;
 }
+
+.server-message_feedback{
+    margin: 38px 0 0;
+}
+
+.g-recaptcha{
+    width: 302px;
+    height: 76px;
+    border-radius: 3px;
+    padding: 0;
+    border: none;
+}

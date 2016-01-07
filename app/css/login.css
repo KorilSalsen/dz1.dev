@@ -1,9 +1,11 @@
 .content-block__container_login {
     padding: 39px 38px;
     position: absolute;
+    width: 332px;
+    box-sizing: border-box;
     top: 50%;
     left: 50%;
-    margin: -170px 0 0 -165px;
+    margin: -170px 0 0 -166px;
     border-radius: 5px;
 }
 

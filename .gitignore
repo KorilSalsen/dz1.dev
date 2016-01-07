@@ -3,3 +3,5 @@
 /node_modules
 /css
 /app/composer
+/php/data.php
+/php/db-connect.php

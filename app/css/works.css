@@ -25,7 +25,8 @@
 
 .work__img {
     display: block;
-    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
     margin: auto;
 }
 
@@ -299,45 +300,4 @@
 
 .file-selected {
     color: #727070;
-}
-
-.server-message{
-    display: none;
-    box-sizing: border-box;
-    border-radius: 3px;
-    padding: 7px 8px;
-    border: 1px solid;
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.server-message__title{
-    font-size: 16px;
-    font-family: 'Open Sans Semibold', sans-serif;
-}
-
-.server-message__close{
-    display: block;
-    text-decoration: none;
-    position: absolute;
-    top: 6px;
-    right: 5px;
-    font-size: 0;
-    width: 11px;
-    height: 11px;
-    background-image: url(../img/spritesheet.png);
-    background-repeat: no-repeat;
-    background-position: -38px -38px;
-}
-
-.server-message_error{
-    background: #e9c8bc;
-    color: #cb6945;
-    border-color: #cb6945;
-}
-.server-message_ok{
-    background: #bde2cc;
-    color: #49bb7b;
-    border-color: #49bb7b;
-    margin: 0;
 }

@@ -1,3 +1,7 @@
+<?php
+session_start(session_name('admin'));
+include_once "php/functions.php";
+?>
 <!doctype html>
 <html lang="ru-RU">
 <head>
@@ -7,6 +11,7 @@
     <link rel="stylesheet" href="bower/normalize-css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/media.css">
     <!--[if IE 8]>
         <script src="bower/html5shiv/dist/html5shiv.min.js"></script>
         <link rel="stylesheet" href="css/ie.css">
@@ -29,6 +34,12 @@
                     <li class="social-list__item twitter"><a href="https://twitter.com/" class="socials" title="Twitter" target="_blank">Twitter</a></li>
                     <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub" target="_blank">GitHub</a></li>
                 </ul>
+                <a href="#" class="open-menu">Меню</a>
+                <ul class="menu-list menu-list_header">
+                    <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Обо мне">Обо мне</a></li>
+                    <li class="menu-list__item"><a class="buttons" href="works.php" title="Мои Работы">Мои Работы</a></li>
+                    <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
+                </ul>
             </div>
         </header>
         <div class="page cf">
@@ -37,8 +48,8 @@
                 <nav class="menu">
                     <ul class="menu-list">
                         <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Обо мне">Обо мне</a></li>
-                        <li class="menu-list__item"><a class="buttons" href="works.html" title="Мои Работы">Мои Работы</a></li>
-                        <li class="menu-list__item"><a class="buttons" href="feedback.html" title="Обратная связь">Обратная связь</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="works.php" title="Мои Работы">Мои Работы</a></li>
+                        <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
                     </ul>
                     <!-- Контакты-->
                     <div class="contacts-wrapper">
@@ -133,12 +144,17 @@
                         </ul>
                     </div>
                 </article>
+                <ul class="contacts-list contacts-list_bottom cf">
+                    <li class="contacts-list__item"><a href="mailto:ikorchenov@bk.ru" class="buttons buttons_contacts buttons_mail" title="Электронная почта">ikorchenov@bk.ru</a></li>
+                    <li class="contacts-list__item"><a href="tel:+79205440827" class="buttons buttons_contacts buttons_phone" title="Телефон">+79205440827</a></li>
+                    <li class="contacts-list__item"><a href="skype:ilya_korchenov" class="buttons buttons_contacts buttons_skype" title="Skype">ilya_korchenov</a></li>
+                </ul>
             </section>
         </div>
     </div>
     <footer class="footer">
         <div class="copyright">
-            <a href="login.html" class="enter">вход</a>
+            <?php print_login_button() ?>
             <span class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</span>
         </div>
     </footer>
