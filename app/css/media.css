@@ -44,8 +44,385 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    .work{
+
+    .work {
         margin-left: 75px;
         width: 194px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    html, body {
+        min-width: 480px;
+    }
+
+    .page, .header__wrapper {
+        max-width: 400px;
+    }
+
+    .menu-list_header{
+        top: 73px;
+    }
+
+    .page-wrapper {
+        margin-bottom: -38px;
+    }
+
+    .page {
+        margin-top: 22px;
+    }
+
+    .page:after {
+        height: 38px;
+    }
+
+    .header {
+        height: 67px;
+        border-bottom-width: 4px;
+    }
+
+    .social-list {
+        display: none;
+    }
+
+    .content-block__tittle {
+        text-align: center;
+        padding: 8px;
+        line-height: 29px;
+    }
+
+    .avatar-wrapper {
+        float: none;
+        margin: auto;
+        margin-bottom: 14px;
+    }
+
+    .block-info {
+        float: none;
+        width: 100%;
+    }
+
+    .skills-list {
+        left: 162px;
+    }
+
+    .content-block {
+        margin-bottom: 15px;
+    }
+
+    .content-block__container {
+        padding: 0 18px;
+        font-size: 16px;
+    }
+
+    .content-list__item {
+        padding: 111px 0 15px;
+        text-align: center;
+        line-height: 1.25em;
+    }
+
+    .place:before {
+        left: 50%;
+        margin-left: -38px;
+        margin-top: 0;
+        top: 19px;
+        width: 76px;
+        height: 76px;
+    }
+
+    .place_work:after {
+        top: 47px;
+        left: 50%;
+        margin-left: -13px;
+        margin-top: 0;
+        background-position: 0 -147px;
+        width: 31px;
+        height: 29px;
+    }
+
+    .place_school:after {
+        top: 47px;
+        left: 50%;
+        margin-left: -11px;
+        margin-top: 0;
+        background-position: -41px -147px;
+        width: 27px;
+        height: 27px;
+    }
+
+    .place_graduate:after {
+        top: 44px;
+        left: 50%;
+        margin-left: -17px;
+        margin-top: 0;
+        background-position: -78px -147px;
+        width: 39px;
+        height: 26px;
+    }
+
+    .place_file:after {
+        top: 47px;
+        left: 50%;
+        margin-left: -7px;
+        margin-top: 0;
+        background-position: -127px -147px;
+        width: 21px;
+        height: 28px;
+    }
+
+    .date {
+        font-size: 14px;
+    }
+
+    .contacts-list_bottom {
+        margin-bottom: 15px;
+    }
+
+    .contacts-list_bottom .contacts-list__item {
+        float: none;
+    }
+
+    .contacts-list_bottom .buttons {
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 24px;
+        line-height: 45px;
+    }
+
+    .buttons_contacts {
+        padding-left: 133px !important;
+    }
+
+    .buttons_contacts:after {
+        width: 14px;
+        height: 48px;
+        background: url(../img/border-big.png);
+        left: 91px;
+    }
+
+    .buttons_contacts:before {
+        left: 35px;
+    }
+
+    .buttons_mail:before {
+        background-position: -130px -112px;
+        width: 32px;
+        height: 24px;
+        margin-top: -12px;
+    }
+
+    .buttons_phone:before {
+        background-position: -171px -112px;
+        width: 24px;
+        height: 32px;
+        margin-top: -16px;
+        margin-left: 6px;
+    }
+
+    .buttons_skype:before {
+        background-position: -200px -112px;
+        width: 28px;
+        height: 28px;
+        margin-top: -14px;
+        margin-left: 1px;
+    }
+
+    .social-list_bottom {
+        display: block;
+        position: static;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .social-list__item {
+        margin-left: 26px;
+    }
+
+    .social-list__item:first-child {
+        margin-left: 22px;
+    }
+
+    .socials_facebook {
+        background-position: -245px -189px;
+        width: 73px;
+        height: 75px;
+    }
+
+    .socials_facebook:hover {
+        background-position: -245px -112px;
+    }
+
+    .socials_vk {
+        background-position: -325px -189px;
+        width: 73px;
+        height: 75px;
+    }
+
+    .socials_vk:hover {
+        background-position: -325px -112px;
+    }
+
+    .socials_twitter {
+        background-position: -405px -189px;
+        width: 73px;
+        height: 75px;
+    }
+
+    .socials_twitter:hover {
+        background-position: -405px -112px;
+    }
+
+    .socials_github {
+        background-position: -485px -189px;
+        width: 73px;
+        height: 75px;
+    }
+
+    .socials_github:hover {
+        background-position: -485px -112px;
+    }
+
+    .copyright {
+        max-width: 400px;
+        line-height: 38px;
+    }
+
+    .copyright__text {
+        text-align: right;
+        font-size: 8px;
+    }
+
+    .works-list{
+        margin-top: 22px;
+    }
+
+    .work{
+        display: block;
+        width: 281px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .work__img-wrapper{
+        height: 200px;
+    }
+
+    .work__link{
+        font-size: 18px;
+    }
+
+    .work__description{
+        font-size: 16px;
+    }
+
+    .work__add-text{
+        text-align: center;
+        padding-top: 157px;
+        font-size: 18px;
+    }
+
+    .feedback-form{
+        width: 279px;
+        margin: 17px auto;
+    }
+
+    .input{
+        box-sizing: border-box;
+        display: block;
+        margin: 0 0 14px 0;
+    }
+
+    .input__text{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .input__text_textarea{
+        height: 137px;
+    }
+
+    .input__fake-upload{
+        width: 308px;
+    }
+
+    .g-recaptcha{
+        width: 304px;
+        margin-left: -12px;
+    }
+    .input_buttons{
+        width: 100%;
+    }
+
+    .work__add-link{
+        height: 222px;
+    }
+
+    .work__add-link:before{
+        height: 90px;
+        width: 90px;
+        margin-left: -45px;
+        top: 42px;
+    }
+
+    .work__add-link:after{
+        height: 34px;
+        width: 34px;
+        margin-left: -15px;
+        top: 76px;
+        background-position: -41px -183px;
+    }
+
+    .content-block__container_popup, .content-block__container_login{
+        width: 400px;
+        margin-left: -200px;
+        box-sizing: border-box;
+        padding: 29px 24px;
+    }
+
+    .content-block__container_login{
+        padding: 45px;
+        margin-top: -160px;
+    }
+
+    .input__text_login{
+        height: 49px;
+        padding-left: 85px;
+    }
+
+    .input_login-email{
+        margin-bottom: 29px;
+    }
+
+    .input__label_login:after{
+        width: 14px;
+        height: 49px;
+        background-position: 0 -189px;
+        top: -15px;
+        left: 35px;
+    }
+
+    .input__label_login{
+        top: 15px;
+        left: 16px;
+    }
+
+    .input__label_login-email{
+        width: 27px;
+        height: 20px;
+        background-position: -193px -148px;
+    }
+
+    .input__label_login-pass{
+        width: 25px;
+        height: 23px;
+        background-position: -158px -148px;
+    }
+    .login-form__checkbox-label{
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .input__button_submit-login{
+        padding: 15px 52px;
     }
 }

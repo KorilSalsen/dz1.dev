@@ -25,14 +25,14 @@ include_once "php/functions.php";
                 <a href="/" title="LoftSchool. Корченов Илья" class="logo">
                     <h1 class="logo__title">
                         LoftSchool. Корченов Илья
-                        <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
                     </h1>
+                    <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
                 </a>
                 <ul class="social-list cf">
-                    <li class="social-list__item facebook"><a href="https://www.facebook.com" class="socials" title="Facebook" target="_blank">Facebook</a></li>
-                    <li class="social-list__item vk"><a href="https://vk.com/id44931502" class="socials" title="Вконтакте" target="_blank">Вконтакте</a></li>
-                    <li class="social-list__item twitter"><a href="https://twitter.com/" class="socials" title="Twitter" target="_blank">Twitter</a></li>
-                    <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub" target="_blank">GitHub</a></li>
+                    <li class="social-list__item"><a href="https://www.facebook.com" class="socials socials_facebook" title="Facebook" target="_blank">Facebook</a></li>
+                    <li class="social-list__item"><a href="https://vk.com/id44931502" class="socials socials_vk" title="Вконтакте" target="_blank">Вконтакте</a></li>
+                    <li class="social-list__item"><a href="https://twitter.com/" class="socials socials_twitter" title="Twitter" target="_blank">Twitter</a></li>
+                    <li class="social-list__item"><a href="https://github.com/KorilSalsen" class="socials socials_github" title="GitHub" target="_blank">GitHub</a></li>
                 </ul>
                 <a href="#" class="open-menu">Меню</a>
                 <ul class="menu-list menu-list_header">
@@ -92,7 +92,7 @@ include_once "php/functions.php";
                                 </li>
                                 <li class="info-list__item info-list__item_skills cf">
                                     <div class="key key_skills">Ключевые навыки: </div>
-                                    <ul class="skills-list">
+                                    <ul class="skills-list cf">
                                         <li class="skill">html</li>
                                         <li class="skill">css</li>
                                         <li class="skill">javascript</li>
@@ -149,13 +149,19 @@ include_once "php/functions.php";
                     <li class="contacts-list__item"><a href="tel:+79205440827" class="buttons buttons_contacts buttons_phone" title="Телефон">+79205440827</a></li>
                     <li class="contacts-list__item"><a href="skype:ilya_korchenov" class="buttons buttons_contacts buttons_skype" title="Skype">ilya_korchenov</a></li>
                 </ul>
+                <ul class="social-list social-list_bottom cf">
+                    <li class="social-list__item"><a href="https://www.facebook.com" class="socials socials_facebook" title="Facebook" target="_blank">Facebook</a></li>
+                    <li class="social-list__item"><a href="https://vk.com/id44931502" class="socials socials_vk" title="Вконтакте" target="_blank">Вконтакте</a></li>
+                    <li class="social-list__item"><a href="https://twitter.com/" class="socials socials_twitter" title="Twitter" target="_blank">Twitter</a></li>
+                    <li class="social-list__item"><a href="https://github.com/KorilSalsen" class="socials socials_github" title="GitHub" target="_blank">GitHub</a></li>
+                </ul>
             </section>
         </div>
     </div>
     <footer class="footer">
         <div class="copyright">
             <?php print_login_button() ?>
-            <span class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</span>
+            <div class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</div>
         </div>
     </footer>
     <script src="bower/jquery/dist/jquery.min.js"></script>

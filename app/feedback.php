@@ -30,16 +30,16 @@ include_once "php/functions.php";
                     </h1>
                 </a>
                 <ul class="social-list cf">
-                    <li class="social-list__item facebook"><a href="https://www.facebook.com" class="socials" title="Facebook" target="_blank">Facebook</a></li>
-                    <li class="social-list__item vk"><a href="https://vk.com/id44931502" class="socials" title="Вконтакте" target="_blank">Вконтакте</a></li>
-                    <li class="social-list__item twitter"><a href="https://twitter.com/" class="socials" title="Twitter" target="_blank">Twitter</a></li>
-                    <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub" target="_blank">GitHub</a></li>
+                    <li class="social-list__item"><a href="https://www.facebook.com" class="socials socials_facebook" title="Facebook" target="_blank">Facebook</a></li>
+                    <li class="social-list__item"><a href="https://vk.com/id44931502" class="socials socials_vk" title="Вконтакте" target="_blank">Вконтакте</a></li>
+                    <li class="social-list__item"><a href="https://twitter.com/" class="socials socials_twitter" title="Twitter" target="_blank">Twitter</a></li>
+                    <li class="social-list__item"><a href="https://github.com/KorilSalsen" class="socials socials_github" title="GitHub" target="_blank">GitHub</a></li>
                 </ul>
                 <a href="#" class="open-menu">Меню</a>
                 <ul class="menu-list menu-list_header">
-                    <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Обо мне">Обо мне</a></li>
+                    <li class="menu-list__item"><a class="buttons" href="index.php" title="Обо мне">Обо мне</a></li>
                     <li class="menu-list__item"><a class="buttons" href="works.php" title="Мои Работы">Мои Работы</a></li>
-                    <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
+                    <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Обратная связь">Обратная связь</a></li>
                 </ul>
             </div>
         </header>
@@ -107,14 +107,24 @@ include_once "php/functions.php";
                         </div>
                     </div>
                 </article>
+                <ul class="contacts-list contacts-list_bottom cf">
+                    <li class="contacts-list__item"><a href="mailto:ikorchenov@bk.ru" class="buttons buttons_contacts buttons_mail" title="Электронная почта">ikorchenov@bk.ru</a></li>
+                    <li class="contacts-list__item"><a href="tel:+79205440827" class="buttons buttons_contacts buttons_phone" title="Телефон">+79205440827</a></li>
+                    <li class="contacts-list__item"><a href="skype:ilya_korchenov" class="buttons buttons_contacts buttons_skype" title="Skype">ilya_korchenov</a></li>
+                </ul>
+                <ul class="social-list social-list_bottom cf">
+                    <li class="social-list__item"><a href="https://www.facebook.com" class="socials socials_facebook" title="Facebook" target="_blank">Facebook</a></li>
+                    <li class="social-list__item"><a href="https://vk.com/id44931502" class="socials socials_vk" title="Вконтакте" target="_blank">Вконтакте</a></li>
+                    <li class="social-list__item"><a href="https://twitter.com/" class="socials socials_twitter" title="Twitter" target="_blank">Twitter</a></li>
+                    <li class="social-list__item"><a href="https://github.com/KorilSalsen" class="socials socials_github" title="GitHub" target="_blank">GitHub</a></li>
+                </ul>
             </section>
         </div>
     </div>
-    <!--Футер-->
     <footer class="footer">
         <div class="copyright">
             <?php print_login_button() ?>
-            <span class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</span>
+            <div class="copyright__text">© 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его!</div>
         </div>
     </footer>
     <script src="bower/jquery/dist/jquery.min.js"></script>
