@@ -397,10 +397,31 @@ function ajaxModule(form) {
     }
 }
 
+function showMenu(){
+    var button = $('.open-menu'),
+        menu = $('.menu-list_header');
+
+    function _eventListener(){
+        button.on('click',function(e){
+            e.preventDefault();
+
+            menu.slideToggle(0);
+        });
+    }
+
+    return {
+        init: function () {
+            _eventListener()
+        }
+    };
+}
+
 addPlaceholder();
 fileLoaderModule().init();
 popupModule().init();
 validateModule().init();
+showMenu().init();
+
 function recaptchaCallback(){
     validateModule().validateInput($('.g-recaptcha'));
 }

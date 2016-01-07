@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="bower/normalize-css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/media.css">
     <!--[if IE 8]>
         <script src="bower/html5shiv/dist/html5shiv.min.js"></script>
         <link rel="stylesheet" href="css/ie.css">

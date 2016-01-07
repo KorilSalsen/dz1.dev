@@ -55,3 +55,21 @@ function print_projects()
     }
 
 }
+
+function clear_data_str($data){
+    return htmlentities(strip_tags(trim($data)));
+}
+
+
+function check_captcha($key, $captcha)
+{
+    $url_to_send = "https://www.google.com/recaptcha/api/siteverify?secret=" . $key . '&response=' . $captcha;
+    $data_request = file_get_contents($url_to_send);
+    $data = json_decode($data_request, true);
+
+    if (isset($data['success']) && $data['success'] == 1) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -1,7 +1,12 @@
 <?php
+//$host = "localhost";
+//$user = "ailyako_korch";
+//$pass = "Koril4578";
+//$db = "ailyako_korch";
+
 $host = "localhost";
-$user = "ailyako_korch";
-$pass = "4578rtui40507080";
+$user = "root";
+$pass = "";
 $db = "ailyako_korch";
 
 mysql_connect($host, $user, $pass) or die(mysql_error());

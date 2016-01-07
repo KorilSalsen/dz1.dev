@@ -1,6 +1,6 @@
 <?php
 session_start(session_name('admin'));
-include_once "php/funtions.php";
+include_once "php/functions.php";
 ?>
 <!doctype html>
 <html lang="ru-RU">
@@ -11,6 +11,7 @@ include_once "php/funtions.php";
     <link rel="stylesheet" href="bower/normalize-css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/works.css">
+    <link rel="stylesheet" href="css/media.css">
     <!--[if IE 8]>
         <script src="bower/html5shiv/dist/html5shiv.min.js"></script>
         <link rel="stylesheet" href="css/ie.css">
@@ -33,6 +34,12 @@ include_once "php/funtions.php";
                     <li class="social-list__item vk"><a href="https://vk.com/id44931502" class="socials" title="Вконтакте" target="_blank">Вконтакте</a></li>
                     <li class="social-list__item twitter"><a href="https://twitter.com/" class="socials" title="Twitter" target="_blank">Twitter</a></li>
                     <li class="social-list__item github"><a href="https://github.com/KorilSalsen" class="socials" title="GitHub" target="_blank">GitHub</a></li>
+                </ul>
+                <a href="#" class="open-menu">Меню</a>
+                <ul class="menu-list menu-list_header">
+                    <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Обо мне">Обо мне</a></li>
+                    <li class="menu-list__item"><a class="buttons" href="works.php" title="Мои Работы">Мои Работы</a></li>
+                    <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
                 </ul>
             </div>
         </header>

@@ -42,4 +42,4 @@ gulp.task('watch', function(){
 });
 
 //Default
-gulp.task('default', ['concat', 'prefix', 'server', 'watch']);
+gulp.task('default', ['prefix', 'server', 'watch']);

@@ -1,11 +1,12 @@
 <?php
 
 require_once "data.php";
+require_once "functions.php";
 
 $inputData = array(
-    'feedback_name' => $_POST['feedback-name'],
-    'feedback_email' => $_POST['feedback-email'],
-    'feedback_message' => $_POST['feedback-message'],
+    'feedback_name' => clear_data_str($_POST['feedback-name']),
+    'feedback_email' => clear_data_str($_POST['feedback-email']),
+    'feedback_message' => clear_data_str($_POST['feedback-message']),
     'feedback_captcha' => $_POST['g-recaptcha-response']
 );
 
@@ -33,11 +34,12 @@ if ($data['status'] == 'ok') {
     require '../composer/vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
 
     $mail = new PHPMailer;
+    $mail->CharSet = 'UTF-8';
     $mail->isSendmail();
-    $mail->setFrom($inputData['feedback_email'], $inputData['feedback_name']);
+    $mail->setFrom('feedback@korchenov.ru', 'korchenov.ru');
     $mail->addAddress('ilyakorchenov@mail.ru', 'Ilya Korchenov');
-    $mail->Subject = "Сообщение с сайта-портфолио от " . $inputData['feedback_name'];
-    $mail->msgHTML("Тестовое письмо с вебинара от ".$inputData['feedback_name'].PHP_EOL.'<br /><br />'.$inputData['feedback_message']);
+    $mail->Subject = $inputData['feedback_name'] . " написал(а) сообщение с сайта";
+    $mail->msgHTML("<b>".$inputData['feedback_name'].' просит прислать ответ на адрес: '.$inputData['feedback_email'].'</b>'.PHP_EOL.'<br/><br />'.$inputData['feedback_message']);
 
 
     if (!$mail->send()) {
@@ -50,16 +52,3 @@ if ($data['status'] == 'ok') {
 header('Content-Type: application/json');
 echo json_encode($data);
 exit;
-
-function check_captcha($key, $captcha)
-{
-    $url_to_send = "https://www.google.com/recaptcha/api/siteverify?secret=" . $key . '&response=' . $captcha;
-    $data_request = file_get_contents($url_to_send);
-    $data = json_decode($data_request, true);
-
-    if (isset($data['success']) && $data['success'] == 1) {
-        return true;
-    } else {
-        return false;
-    }
-}
