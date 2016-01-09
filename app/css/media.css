@@ -3,7 +3,12 @@
         min-width: 768px;
     }
 
-    .header__wrapper {
+    .header {
+        height: 67px;
+        border-bottom-width: 4px;
+    }
+
+    .header__wrapper, .copyright {
         max-width: 688px;
     }
 
@@ -19,15 +24,47 @@
         display: none;
     }
 
+    .page-wrapper {
+        margin-bottom: -38px;
+    }
+
+    .page:after {
+        height: 38px;
+    }
+
     .page {
         width: 642px;
+        margin-top: 22px;
     }
 
     .content {
         width: 100%;
     }
 
+    .content-block__tittle {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        line-height: 29px;
+    }
+
+    .content-block__container{
+        padding: 26px 41px;
+    }
+
+    .block-info{
+        width: 371px;
+    }
+
+    .content-block{
+        margin-bottom: 21px;
+    }
+
+    .content-block__container_list{
+        padding: 15px 41px;
+    }
+
     .contacts-list_bottom {
+        margin-top: 40px;
         display: block;
         margin-bottom: 41px;
     }
@@ -49,6 +86,10 @@
         margin-left: 75px;
         width: 194px;
     }
+
+    .copyright {
+        line-height: 38px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -64,31 +105,13 @@
         top: 73px;
     }
 
-    .page-wrapper {
-        margin-bottom: -38px;
-    }
-
-    .page {
-        margin-top: 22px;
-    }
-
-    .page:after {
-        height: 38px;
-    }
-
-    .header {
-        height: 67px;
-        border-bottom-width: 4px;
-    }
-
     .social-list {
         display: none;
     }
 
     .content-block__tittle {
         text-align: center;
-        padding: 8px;
-        line-height: 29px;
+        padding: 5px;
     }
 
     .avatar-wrapper {
@@ -107,11 +130,16 @@
     }
 
     .content-block {
-        margin-bottom: 15px;
+        margin-bottom: 21px;
     }
 
     .content-block__container {
         padding: 0 18px;
+        font-size: 16px;
+    }
+
+    .content-block__container_info {
+        padding: 21px 18px 12px;
         font-size: 16px;
     }
 
@@ -175,6 +203,7 @@
     }
 
     .contacts-list_bottom {
+        margin-top: 0;
         margin-bottom: 15px;
     }
 
@@ -284,7 +313,6 @@
 
     .copyright {
         max-width: 400px;
-        line-height: 38px;
     }
 
     .copyright__text {

@@ -384,7 +384,7 @@ ul {
 .copyright {
     font-size: 12px;
     margin: auto;
-    width: 624px;
+    max-width: 624px;
     line-height: 61px;
     text-align: center;
     vertical-align: middle;
