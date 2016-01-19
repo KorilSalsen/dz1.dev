@@ -221,7 +221,7 @@
         font-size: 16px;
     }
 
-    .block__container_feedback{
+    .content-block__container_feedback{
         padding: 47px 41px 26px;
     }
 
@@ -229,11 +229,14 @@
         padding: 38px 41px;
         margin-top: -178px;
     }
+
+
 }
 
 @media screen and (max-width: 480px) {
     html, body {
         min-width: 480px;
+        min-height: 400px;
     }
 
     .page, .header__wrapper {
@@ -626,5 +629,9 @@
     .login-form__checkbox-label{
         padding-left: 32px;
         margin-bottom: 28px;
+    }
+
+    .form-title{
+        font-size: 16px;
     }
 }

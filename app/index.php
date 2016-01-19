@@ -74,6 +74,8 @@ include_once "php/functions.php";
                                         <li class="skill">javascript</li>
                                         <li class="skill">git</li>
                                         <li class="skill">gulp</li>
+                                        <li class="skill">jade</li>
+                                        <li class="skill">sass</li>
                                     </ul>
                                 </li>
                             </ul>
