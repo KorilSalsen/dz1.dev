@@ -586,33 +586,6 @@ ul {
     margin-bottom: 34px;
 }
 
-.menu-list_header {
-    display: none;
-    position: absolute;
-    width: 197px;
-    right: -24px;
-    top: 87px;
-    z-index: 2;
-    box-shadow: 0 2px 7px 0 rgba(84, 84, 84, 0.57);
-}
-
-.menu-list_header:before {
-    display: block;
-    content: '';
-    width: 0;
-    height: 0;
-    border-right: 11px solid transparent;
-    border-bottom: 16px solid #f2f0ef;
-    border-left: 11px solid transparent;
-    position: absolute;
-    top: -16px;
-    right: 25px;
-}
-
-.menu-list_header .buttons {
-    padding: 13px 17px;
-}
-
 .menu-list__item:first-child .buttons {
     border-radius: 4px 4px 0 0;
 }

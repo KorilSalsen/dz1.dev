@@ -12,16 +12,47 @@
         max-width: 688px;
     }
 
+    .menu-list{
+        top: 64px;
+    }
+
+    .menu-list:before {
+        display: block;
+        content: '';
+        width: 0;
+        height: 0;
+        border-right: 11px solid transparent;
+        border-bottom: 16px solid #f2f0ef;
+        border-left: 11px solid transparent;
+        position: absolute;
+        top: -16px;
+        right: 25px;
+    }
+
+    .menu-list {
+        position: absolute;
+        width: 197px;
+        right: 16px;
+        top: 64px;
+        z-index: 2;
+        box-shadow: 0 2px 7px 0 rgba(84, 84, 84, 0.57);
+        outline: none;
+    }
+
+    .menu-list_hide{
+        display: none;
+    }
+
+    .buttons {
+        padding: 13px 17px;
+    }
+
     .social-list {
         right: 56px;
     }
 
     .open-menu {
         display: block;
-    }
-
-    .menu {
-        display: none;
     }
 
     .page-wrapper {
@@ -51,6 +82,11 @@
         padding: 26px 41px;
     }
 
+    .content-block__container_works{
+        padding-left: 17px;
+        padding-right: 87px;
+    }
+
     .block-info{
         width: 371px;
     }
@@ -63,32 +99,135 @@
         padding: 15px 41px;
     }
 
-    .contacts-list_bottom {
-        margin-top: 40px;
+    .contacts-list__title{
+        display: none;
+    }
+
+    .sidebar{
+        margin-top: 19px;
+        width: 100%;
+    }
+
+    .menu{
+        width: 100%;
+    }
+
+    .contacts-list {
         display: block;
         margin-bottom: 41px;
     }
 
-    .contacts-list_bottom .contacts-list__item {
+    .contacts-list__item {
         float: left;
     }
 
-    .contacts-list_bottom .buttons {
+    .buttons_contacts {
         box-sizing: border-box;
         width: 214px;
-        padding-left: 79px;
+        padding: 0 10px 0 79px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
     .work {
-        margin-left: 75px;
+        margin-left: 70px;
         width: 194px;
+    }
+
+    .work__add-text{
+        text-align: center;
+        padding-top: 104px;
+        padding-bottom: 27px;
+        font-size: 16px;
+    }
+
+    .work__add-link:before{
+        height: 62px;
+        width: 62px;
+        margin-left: -31px;
+        top: 30px;
+    }
+
+    .work__add-link:after{
+        height: 25px;
+        width: 24px;
+        margin-left: -11px;
+        top: 51px;
+        background-position: -86px -183px;
+    }
+
+    .work__link{
+        line-height: 15px;
+        font-size: 15px;
     }
 
     .copyright {
         line-height: 38px;
+    }
+
+    .content-block__container_popup{
+        box-sizing: border-box;
+        padding: 27px 25px;
+        width: 438px;
+        margin-left: -219px;
+        margin-top: -274px;
+    }
+
+    .input__label_popup{
+        font-size: 16px;
+        padding-bottom: 16px;
+    }
+    .input_popup {
+        margin-bottom: 11px;
+    }
+
+    .input__text_popup{
+        font-size: 14px;
+        line-height: 17px;
+        height: 49px;
+    }
+
+    .input__text_textarea-popup{
+        height: 134px;
+    }
+
+    .input__button_submit-popup{
+        font-size: 16px;
+        padding: 14px 31px;
+        width: 147px;
+        height: 46px;
+    }
+
+    .fake-upload-button{
+        width: 65px;
+    }
+
+    .fake-upload-button:after{
+        width: 32px;
+        height: 22px;
+        background-position: -126px -183px;
+        left: 18px;
+        margin-top: -11px;
+    }
+
+    .popup__close{
+        width: 18px;
+        height: 18px;
+        background-position: -174px -183px;
+    }
+
+    .form-title_popup{
+        font-size: 16px;
+    }
+
+    .block__container_feedback{
+        padding: 47px 41px 26px;
+    }
+
+    .content-block__container_login{
+        padding: 38px 41px;
+        margin-top: -178px;
     }
 }
 
@@ -101,8 +240,17 @@
         max-width: 400px;
     }
 
-    .menu-list_header{
+    .menu-list{
         top: 73px;
+        right: 0;
+    }
+
+    .menu-list:before {
+        border-right: 16px solid transparent;
+        border-bottom: 25px solid #f2f0ef;
+        border-left: 16px solid transparent;
+        top: -25px;
+        right: 35px;
     }
 
     .social-list {
@@ -202,23 +350,27 @@
         font-size: 14px;
     }
 
-    .contacts-list_bottom {
+    .sidebar{
         margin-top: 0;
         margin-bottom: 15px;
     }
+    .contacts-wrapper{
+        margin-bottom: 15px;
+    }
 
-    .contacts-list_bottom .contacts-list__item {
+    .contacts-list {
+        margin: 0;
+    }
+
+    .contacts-list__item {
         float: none;
     }
 
-    .contacts-list_bottom .buttons {
+    .buttons_contacts {
         box-sizing: border-box;
         width: 100%;
         font-size: 24px;
         line-height: 45px;
-    }
-
-    .buttons_contacts {
         padding-left: 133px !important;
     }
 
@@ -260,7 +412,6 @@
         display: block;
         position: static;
         margin-top: 0;
-        margin-bottom: 15px;
     }
 
     .social-list__item {
@@ -331,10 +482,6 @@
         margin-right: auto;
     }
 
-    .work__img-wrapper{
-        height: 200px;
-    }
-
     .work__link{
         font-size: 18px;
     }
@@ -346,6 +493,7 @@
     .work__add-text{
         text-align: center;
         padding-top: 157px;
+        padding-bottom: 41px;
         font-size: 18px;
     }
 
@@ -381,10 +529,6 @@
         width: 100%;
     }
 
-    .work__add-link{
-        height: 222px;
-    }
-
     .work__add-link:before{
         height: 90px;
         width: 90px;
@@ -400,6 +544,11 @@
         background-position: -41px -183px;
     }
 
+    .work__link{
+        line-height: 18px;
+        font-size: 18px;
+    }
+
     .content-block__container_popup, .content-block__container_login{
         width: 400px;
         margin-left: -200px;
@@ -409,7 +558,7 @@
 
     .content-block__container_login{
         padding: 45px;
-        margin-top: -160px;
+        margin-top: -199px;
     }
 
     .input__text_login{
@@ -419,6 +568,10 @@
 
     .input_login-email{
         margin-bottom: 29px;
+    }
+
+    .input_login-pass{
+        margin-bottom: 22px;
     }
 
     .input__label_login:after{
@@ -451,6 +604,27 @@
     }
 
     .input__button_submit-login{
-        padding: 15px 52px;
+        width: 183px;
+        line-height: 16px;
+        font-size: 16px;
+        padding: 14px 52px;
+    }
+
+    .login-form__checkbox-label:before {
+        left: -4px;
+        top: 50%;
+        margin-top: -13px;
+        width: 26px;
+        height: 26px;
+        background-position: -39px -224px;
+    }
+
+    .login-form__checkbox:checked + .login-form__checkbox-label:before {
+        background-position: -72px -224px;
+    }
+
+    .login-form__checkbox-label{
+        padding-left: 32px;
+        margin-bottom: 28px;
     }
 }

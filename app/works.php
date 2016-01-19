@@ -24,10 +24,8 @@ include_once "php/functions.php";
         <header class="header">
             <div class="header__wrapper">
                 <a href="/" title="LoftSchool. Корченов Илья" class="logo">
-                    <h1 class="logo__title">
-                        LoftSchool. Корченов Илья
-                        <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
-                    </h1>
+                    <h1 class="logo__title">LoftSchool. Корченов Илья</h1>
+                    <img class="logo__img" src="img/logo.png" alt="LoftSchool. Корченов Илья">
                 </a>
                 <ul class="social-list cf">
                     <li class="social-list__item"><a href="https://www.facebook.com" class="socials socials_facebook" title="Facebook" target="_blank">Facebook</a></li>
@@ -36,19 +34,25 @@ include_once "php/functions.php";
                     <li class="social-list__item"><a href="https://github.com/KorilSalsen" class="socials socials_github" title="GitHub" target="_blank">GitHub</a></li>
                 </ul>
                 <a href="#" class="open-menu">Меню</a>
-                <ul class="menu-list menu-list_header">
-                    <li class="menu-list__item"><a class="buttons" href="index.php" title="Обо мне">Обо мне</a></li>
-                    <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Мои Работы">Мои Работы</a></li>
-                    <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
-                </ul>
             </div>
         </header>
         <!--Страница-->
         <div class="page cf">
+            <section class="content">
+                <!--Работы-->
+                <article class="content-block">
+                    <h3 class="content-block__tittle">Мои работы</h3>
+                    <div class="content-block__container content-block__container_works cf">
+                        <ul class="works-list">
+                            <?php print_projects() ?>
+                        </ul>
+                    </div>
+                </article>
+            </section>
             <aside class="sidebar">
                 <!-- Меню-->
-                <nav class="menu">
-                    <ul class="menu-list">
+                <nav class="menu ">
+                    <ul class="menu-list menu-list_hide">
                         <li class="menu-list__item"><a class="buttons" href="index.php" title="Обо мне">Обо мне</a></li>
                         <li class="menu-list__item"><a class="buttons buttons_active" href="" title="Мои Работы">Мои Работы</a></li>
                         <li class="menu-list__item"><a class="buttons" href="feedback.php" title="Обратная связь">Обратная связь</a></li>
@@ -56,36 +60,21 @@ include_once "php/functions.php";
                     <!-- Контакты-->
                     <div class="contacts-wrapper">
                         <div class="contacts-list__title">Контакты</div>
-                        <ul class="contacts-list">
+                        <ul class="contacts-list cf">
                             <li class="contacts-list__item"><a href="mailto:ikorchenov@bk.ru" class="buttons buttons_contacts buttons_mail" title="Электронная почта">ikorchenov@bk.ru</a></li>
                             <li class="contacts-list__item"><a href="tel:+79205440827" class="buttons buttons_contacts buttons_phone" title="Телефон">+79205440827</a></li>
                             <li class="contacts-list__item"><a href="skype:ilya_korchenov" class="buttons buttons_contacts buttons_skype" title="Skype">ilya_korchenov</a></li>
                         </ul>
                     </div>
+                    <!--Дополнительные соц кнопки-->
+                    <ul class="social-list social-list_bottom cf">
+                        <li class="social-list__item"><a href="https://www.facebook.com" class="socials socials_facebook" title="Facebook" target="_blank">Facebook</a></li>
+                        <li class="social-list__item"><a href="https://vk.com/id44931502" class="socials socials_vk" title="Вконтакте" target="_blank">Вконтакте</a></li>
+                        <li class="social-list__item"><a href="https://twitter.com/" class="socials socials_twitter" title="Twitter" target="_blank">Twitter</a></li>
+                        <li class="social-list__item"><a href="https://github.com/KorilSalsen" class="socials socials_github" title="GitHub" target="_blank">GitHub</a></li>
+                    </ul>
                 </nav>
             </aside>
-            <section class="content">
-                <!--Работы-->
-                <article class="content-block">
-                    <h3 class="content-block__tittle">Мои работы</h3>
-                    <div class="content-block__container cf">
-                        <ul class="works-list">
-                            <?php print_projects() ?>
-                        </ul>
-                    </div>
-                </article>
-                <ul class="contacts-list contacts-list_bottom cf">
-                    <li class="contacts-list__item"><a href="mailto:ikorchenov@bk.ru" class="buttons buttons_contacts buttons_mail" title="Электронная почта">ikorchenov@bk.ru</a></li>
-                    <li class="contacts-list__item"><a href="tel:+79205440827" class="buttons buttons_contacts buttons_phone" title="Телефон">+79205440827</a></li>
-                    <li class="contacts-list__item"><a href="skype:ilya_korchenov" class="buttons buttons_contacts buttons_skype" title="Skype">ilya_korchenov</a></li>
-                </ul>
-                <ul class="social-list social-list_bottom cf">
-                    <li class="social-list__item"><a href="https://www.facebook.com" class="socials socials_facebook" title="Facebook" target="_blank">Facebook</a></li>
-                    <li class="social-list__item"><a href="https://vk.com/id44931502" class="socials socials_vk" title="Вконтакте" target="_blank">Вконтакте</a></li>
-                    <li class="social-list__item"><a href="https://twitter.com/" class="socials socials_twitter" title="Twitter" target="_blank">Twitter</a></li>
-                    <li class="social-list__item"><a href="https://github.com/KorilSalsen" class="socials socials_github" title="GitHub" target="_blank">GitHub</a></li>
-                </ul>
-            </section>
         </div>
         <!--Попап-->
         <div class="popup" data-popup-name="new-project">
@@ -109,7 +98,7 @@ include_once "php/functions.php";
                         <label class="input__label input__label_popup" for="pic-of-work">Картинка проекта</label>
                         <label for="pic-of-work" class="upload-label-wrapper">
                             <span class="fake-input-wrapper ">
-                                <input class="input__text input__fake-upload" type="text" placeholder="Загрузите изображение" readonly data-tooltip="картинка">
+                                <input class="input__text input__fake-upload input__text_popup" type="text" placeholder="Загрузите изображение" readonly data-tooltip="картинка">
                             </span>
                             <span class="fake-upload-button">Обзор</span>
                             <input id="pic-of-work" class="input__upload" type="file" name="work-pic">
