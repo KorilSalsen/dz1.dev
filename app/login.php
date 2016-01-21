@@ -12,7 +12,7 @@
         <script src="bower/html5shiv/dist/html5shiv.min.js"></script>
         <link rel="stylesheet" href="css/ie.css">
     <![endif]-->
-    <title>Выпускной проект №1. Мои работы.</title>
+    <title>Корченов.ру. Вход.</title>
 </head>
 <body>
     <div class="page-wrapper">

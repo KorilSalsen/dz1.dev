@@ -16,7 +16,7 @@ include_once "php/functions.php";
         <script src="bower/html5shiv/dist/html5shiv.min.js"></script>
         <link rel="stylesheet" href="css/ie.css">
     <![endif]-->
-    <title>Выпускной проект №1. Обо мне.</title>
+    <title>Корченов.ру. Обо мне.</title>
 </head>
 <body>
     <div class="page-wrapper">

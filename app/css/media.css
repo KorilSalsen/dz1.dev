@@ -1,6 +1,6 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1199px) {
     html, body {
-        min-width: 768px;
+        min-width: 688px;
     }
 
     .header {
@@ -10,10 +10,6 @@
 
     .header__wrapper, .copyright {
         max-width: 688px;
-    }
-
-    .menu-list{
-        top: 64px;
     }
 
     .menu-list:before {
@@ -32,8 +28,8 @@
     .menu-list {
         position: absolute;
         width: 197px;
-        right: 16px;
-        top: 64px;
+        right: -46px;
+        top: -23px;
         z-index: 2;
         box-shadow: 0 2px 7px 0 rgba(84, 84, 84, 0.57);
         outline: none;
@@ -64,6 +60,7 @@
     }
 
     .page {
+        position: relative;
         width: 642px;
         margin-top: 22px;
     }
@@ -233,9 +230,9 @@
 
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 767px) {
     html, body {
-        min-width: 480px;
+        min-width: 400px;
         min-height: 400px;
     }
 
@@ -244,8 +241,8 @@
     }
 
     .menu-list{
-        top: 73px;
-        right: 0;
+        top: -17px;
+        right: -37px;
     }
 
     .menu-list:before {
@@ -278,6 +275,7 @@
 
     .skills-list {
         left: 162px;
+        width: 213px;
     }
 
     .content-block {
@@ -633,5 +631,23 @@
 
     .form-title{
         font-size: 16px;
+    }
+
+    .server-message_feedback {
+        margin: 38px 0 16px;
+    }
+}
+@media screen and (max-width: 480px){
+    .header__wrapper{
+       max-width: 320px;
+    } 
+    
+    .copyright {
+        max-width: 360px;
+    }
+    
+    .menu-list{
+        top: -17px;
+        right: 0;
     }
 }

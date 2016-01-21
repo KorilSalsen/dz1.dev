@@ -1,7 +1,15 @@
-INSTALLATION
+# Site-portfolio
 ------------
-1. git clone https://github.com:KorilSalsen/dz1.dev.git site
-2. cd site
-3. bower i
-4. npm i
-5. gulp
+>Project of website-portfolio with adaptive design for frontend developer.
+
+## [Go to the site](http://korchenov.ru)
+# Installation
+------------
+```sh
+mkdir site
+git clone https://github.com:KorilSalsen/site-portfolio.git site
+cd site
+npm install
+bower install
+gulp
+```

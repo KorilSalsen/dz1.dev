@@ -11,9 +11,6 @@ body {
 
 body {
     background: #e1e9ad;
-    background: url("../img/background.jpg");
-    background-size: cover;
-    background-attachment: fixed;
     font-family: 'Open Sans Regular', sans-serif;
     color: #727070;
     font-size: 14px;
@@ -379,6 +376,7 @@ ul {
     background: linear-gradient(to top, #f0f0f0, #fff);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    position: relative;
 }
 
 .copyright {
@@ -546,6 +544,10 @@ ul {
     min-height: 100%;
     margin-bottom: -61px;
     position: relative;
+    background: none;
+    background: url("../img/background.jpg");
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .page {
