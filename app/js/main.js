@@ -271,7 +271,7 @@ function ajaxModule(form) {
             serverMessageClose.show();
             if (!noMoveParent) {
                 container.css({
-                    'top': '-=' + serverMessageBlock.outerHeight(true)
+                    'margin-top': '-=' + serverMessageBlock.outerHeight(true)
                 });
             }
         }
@@ -302,6 +302,8 @@ function ajaxModule(form) {
                 'title': 'Ошибка!',
                 'message': message
             };
+
+            container.attr('style', '');
 
             _messageLoader.error(data, className, noMoveParent);
         }

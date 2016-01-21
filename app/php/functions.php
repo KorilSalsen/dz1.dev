@@ -1,5 +1,6 @@
 <?php
 
+//Вывод кнопки добаления проекта
 function print_login_button()
 {
     $enter = "<a href='login.php' class='enter'>вход</a>";
@@ -12,6 +13,7 @@ function print_login_button()
     }
 }
 
+//Вывод оектов
 function print_projects()
 {
     require_once "db-connect.php";
@@ -56,11 +58,12 @@ function print_projects()
 
 }
 
+//Очистка введеного текста
 function clear_data_str($data){
     return htmlentities(strip_tags(trim($data)));
 }
 
-
+//Проверка капчи
 function check_captcha($key, $captcha)
 {
     $url_to_send = "https://www.google.com/recaptcha/api/siteverify?secret=" . $key . '&response=' . $captcha;
@@ -72,4 +75,14 @@ function check_captcha($key, $captcha)
     } else {
         return false;
     }
+}
+
+//Определение расширения файла
+function getExtension($filename, $point) {
+    return substr(strrchr($filename, $point), 1);
+}
+
+//Определение типа файла
+function getTypeOfFile($filename) {
+    return substr($filename, 0, strrpos($filename, '/'));
 }
