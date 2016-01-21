@@ -3,7 +3,7 @@
 >Project of website-portfolio with adaptive design for frontend developer.
 
 ## [Go to the site](http://korchenov.ru)
-# Installation
+## Installation
 ------------
 ```sh
 mkdir site
